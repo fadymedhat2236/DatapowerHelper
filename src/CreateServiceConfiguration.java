@@ -79,7 +79,6 @@ public class CreateServiceConfiguration {
         }
     }
 
-
     public static void createEndPointsFile(){
 
         try {
@@ -171,7 +170,7 @@ public class CreateServiceConfiguration {
             service.setAttributeNode(attr);
 
             for(int i=0;i<Constants.auditVars.length;i++) {
-                Element userDefined = document.createElement(Constants.auditVars[i][0]);
+                Element userDefined = document.createElement("a:"+Constants.auditVars[i][0]);
                 service.appendChild(userDefined);
 
                 attr = document.createAttribute("target");

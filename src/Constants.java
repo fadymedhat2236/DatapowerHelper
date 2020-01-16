@@ -2,6 +2,7 @@ public class Constants {
     public static final String serviceName="B2BBillMng";
     public static final String backendName="ESB";
     public static final String domainURL="https://192.168.179.128:9090";
+    public static final String WSDLFragmentID="http://www.Ejada.com";
     //for the files
     public static final String serviceFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Services\\";
     public static final String StubMatchXpath="B2BBillMngRq";

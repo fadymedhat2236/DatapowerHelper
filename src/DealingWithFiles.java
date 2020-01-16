@@ -24,6 +24,12 @@ public class DealingWithFiles {
         //Creating the directory
         bool = file.mkdir();
 
+        path = Constants.serviceFilesPath+"/"+Constants.serviceName+"/temp";
+        //Creating a File object
+        file = new File(path);
+        //Creating the directory
+        bool = file.mkdir();
+
     }
 
     public static void writeToFile(String data,String path) {
