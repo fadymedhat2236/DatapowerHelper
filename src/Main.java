@@ -4,18 +4,17 @@ public class Main {
 
 
         //first create service folders
-        //DealingWithFiles.createServiceFolders();;
+        DealingWithFiles.createServiceFolders();;
 
         //for the configuration files
-        //CreateServiceConfiguration.createConfigurationFile();
-        //CreateServiceConfiguration.createEndPointsFile();
-        //CreateServiceConfiguration.createauditVarsFile();
+        CreateServiceConfiguration.createConfigurationFile();
+        CreateServiceConfiguration.createEndPointsFile();
+        CreateServiceConfiguration.createauditVarsFile();
 
         //for the transformtion templates
-        //CreateServiceTransformation.createTransformationTemplates();
+        CreateServiceTransformation.createTransformationTemplates();
 
-        //DealingWithFiles.createServiceFolders();
-        //DPScripts.generateStubConfiguration();
+        DPScripts.generateStubConfiguration();
         DPScripts.generateWSPConfiguration();
     }
 }

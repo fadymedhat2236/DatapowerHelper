@@ -1,12 +1,12 @@
 public class Constants {
-    public static final String serviceName="B2BBillMng";
+    public static final String serviceName="B2BStmtDtlsInq";
     public static final String backendName="ESB";
     public static final String domainURL="https://192.168.179.128:9090";
     public static final String WSDLFragmentID="http://www.Ejada.com";
     //for the files
     public static final String serviceFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Services\\";
-    public static final String StubMatchXpath="B2BBillMngRq";
-    public static final String StubFSHPort="2238";
+    public static final String StubMatchXpath="EPmtStmtDtlsInqRq";
+    public static final String StubFSHPort="2240";
 
     //Configuration file
     public static final String AUDIT_FLG="true";
@@ -16,19 +16,19 @@ public class Constants {
     public static final String DUMP_RESPONSE_FLG="true";
 
     //endpoints file
-    public static final String EP_ID[]={"ESB-B2BBillMng"};
+    public static final String EP_ID[]={"ESB-B2BStmtDtlsInq","ESB-B2BStmtDtlsInq"};
     public static final String EP_PROTOCOL[]={"HTTP","MQ"};
-    public static final String EP_REQUEST[]={"http://192.168.179.128:"+Constants.StubFSHPort,"B2BBillMngRq"};
-    public static final String EP_RESPONSE[]={"B2BBillMngRs"};
+    public static final String EP_REQUEST[]={"http://192.168.179.128:"+Constants.StubFSHPort,"B2BStmtDtlsInqRq"};
+    public static final String EP_RESPONSE[]={null,"B2BStmtDtlsInqRs"};
     public static final String EP_QMGR="EAIQMGR";
     public static final String EP_EXPIRY="25000";
     public static final String EP_TIMEOUT="30000";
 
     //auditVARS file
-    public static final String auditVars[][] ={{"UsrDef1","REQ","BillNum"}};
+    public static final String auditVars[][] ={{"UsrDef1","REQ","AcctNum"},{"UsrDef2","REQ","FromDt"},{"UsrDef3","REQ","ToDt"},{"UsrDef4","IRPLY","ReceiptDt"}};
     //for the error mapping
 
-    public static final String BEFixedPath="//*[local-name()='Header']/*[local-name()='ISMHdr']/*[local-name()='ReaspeCde']/*";
+    public static final String BEFixedPath="//*[local-name()='Header']/*[local-name()='ISMHdr']/*[local-name()='RespeCde']/*";
     public static final String FixedPath="//*[local-name()='Body']/*";
     public static final String errorPaths[]={"RtrnCde","ReasCde","DiagText","StatusCode","StatusDetails"};
 
@@ -114,21 +114,42 @@ public class Constants {
             "    </xsl:template>\n" +
             "</xsl:stylesheet>\n";
 
-    public static final String StubMsg="<B2BBillMngCreateRs>\n" +
-            "    <Header>\n" +
-            "        <Sender>Sender0</Sender>\n" +
-            "        <Receiver>Receiver0</Receiver>\n" +
-            "        <MessageType>MessageType0</MessageType>\n" +
-            "        <MessageDescription>MessageDescription0</MessageDescription>\n" +
-            "        <TimeStamp>2006-05-04T18:13:51.0</TimeStamp>\n" +
-            "        <SystemID>SystemID</SystemID>\n" +
-            "    </Header>\n" +
-            "    <Body>\n" +
-            "        <DocumentID>50</DocumentID>\n" +
-            "        <StatusCode>Status</StatusCode>\n" +
-            "        <StatusDetails>StatusDetails0</StatusDetails>\n" +
-            "    </Body>\n" +
-            "</B2BBillMngCreateRs>";
+    public static final String StubMsg="<EPmtReportDownloadRs>\n" +
+            "\t<Header>\n" +
+            "\t\t<OpHdr>\n" +
+            "\t\t\t<OpHdrVersNum/>\n" +
+            "\t\t\t<OpDefin>\n" +
+            "\t\t\t\t<SvceId>B2B</SvceId>\n" +
+            "\t\t\t\t<OpId>RPRTDNLD</OpId>\n" +
+            "\t\t\t\t<SvceVersNum/>\n" +
+            "\t\t\t</OpDefin>\n" +
+            "\t\t</OpHdr>\n" +
+            "\t\t<ISMHdr>\n" +
+            "\t\t\t<ISMHdrVersNum/>\n" +
+            "\t\t\t<AppName>B2B</AppName>\n" +
+            "\t\t\t<UserId/>\n" +
+            "\t\t\t<EmplyUserId>SABB000001</EmplyUserId>\n" +
+            "\t\t\t<ClntId>B2B</ClntId>\n" +
+            "\t\t\t<ClntHostId>MUSANED001</ClntHostId>\n" +
+            "\t\t\t<GloblLogId>644974</GloblLogId>\n" +
+            "\t\t\t<MsgInstcId/>\n" +
+            "\t\t\t<UserDviceId/>\n" +
+            "\t\t\t<InbndChanlId/>\n" +
+            "\t\t\t<SessnId/>\n" +
+            "\t\t\t<MsgCreatTmsp>2020-01-07T13:41:59</MsgCreatTmsp>\n" +
+            "\t\t\t<RespeCde>\n" +
+            "\t\t\t\t<RtrnCde>00</RtrnCde>\n" +
+            "\t\t\t\t<ReasCde>00000</ReasCde>\n" +
+            "\t\t\t\t<DiagText>Success</DiagText>\n" +
+            "\t\t\t</RespeCde>\n" +
+            "\t\t</ISMHdr>\n" +
+            "\t</Header>\n" +
+            "\t<Body>\n" +
+            "\t\t<ReportData>\n" +
+            "\t\t\t<![CDATA[MUSANED001,20190901|1,36153,20200107,5809.15,5734.91|1,36155,20200107,7652.40,.00|1,36156,20200107,1785.00,1761.46|1,36157,20200107,1942.00,1916.49|1,36158,20200107,9256.80,.00|1,36159,20200107,5157.60,5098.04|]]>\n" +
+            "\t\t</ReportData>\n" +
+            "\t</Body>\n" +
+            "</EPmtReportDownloadRs>";
 
     public static final String StubTemplate="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n" +
