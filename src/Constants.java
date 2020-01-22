@@ -1,12 +1,12 @@
 public class Constants {
-    public static final String serviceName="B2BStmtDtlsInq";
+    public static final String serviceName="B2BPROMng";
     public static final String backendName="ESB";
     public static final String domainURL="https://192.168.179.128:9090";
     public static final String WSDLFragmentID="http://www.Ejada.com";
     //for the files
     public static final String serviceFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Services\\";
-    public static final String StubMatchXpath="EPmtStmtDtlsInqRq";
-    public static final String StubFSHPort="2240";
+    public static final String StubMatchXpath="EPmtSPMngRq";
+    public static final String StubFSHPort="2241";
 
     //Configuration file
     public static final String AUDIT_FLG="true";
@@ -16,10 +16,10 @@ public class Constants {
     public static final String DUMP_RESPONSE_FLG="true";
 
     //endpoints file
-    public static final String EP_ID[]={"ESB-B2BStmtDtlsInq","ESB-B2BStmtDtlsInq"};
+    public static final String EP_ID[]={"ESB-B2BPROMng","ESB-B2BPROMng"};
     public static final String EP_PROTOCOL[]={"HTTP","MQ"};
-    public static final String EP_REQUEST[]={"http://192.168.179.128:"+Constants.StubFSHPort,"B2BStmtDtlsInqRq"};
-    public static final String EP_RESPONSE[]={null,"B2BStmtDtlsInqRs"};
+    public static final String EP_REQUEST[]={"http://192.168.179.128:"+Constants.StubFSHPort,"B2BPROMngRq"};
+    public static final String EP_RESPONSE[]={null,"B2BPROMngRs"};
     public static final String EP_QMGR="EAIQMGR";
     public static final String EP_EXPIRY="25000";
     public static final String EP_TIMEOUT="30000";
