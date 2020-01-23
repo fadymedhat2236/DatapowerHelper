@@ -1,7 +1,7 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.rmi.UnexpectedException;
 
 public class DealingWithFiles {
 
@@ -54,4 +54,9 @@ public class DealingWithFiles {
         }
     }
 
+    public static String readFromFile(String path) throws IOException {
+        String data = "";
+        data = new String(Files.readAllBytes(Paths.get(path)));
+        return data;
+    }
 }

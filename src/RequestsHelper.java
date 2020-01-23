@@ -1,9 +1,12 @@
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,6 +85,47 @@ public class RequestsHelper {
         }
         System.out.println(builder.toString());
         return HttpRequest.BodyPublishers.ofString(builder.toString());
+    }
+
+    private static String basicAuth(String username, String password) {
+        return "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
+    }
+
+    public static void CreateFolder(String folderPath) throws URISyntaxException, IOException, InterruptedException {
+        String message="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<env:Envelope xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "\t<env:Body>\n" +
+                "\t\t<dp:request domain=\"default\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<dp:do-action>\n" +
+                "\t\t\t\t<CreateDir>\n" +
+                "\t\t\t\t\t<Dir>"+folderPath+"</Dir>\n" +
+                "\t\t\t\t</CreateDir>\n" +
+                "\t\t\t</dp:do-action>\n" +
+                "\t\t</dp:request>\n" +
+                "\t</env:Body>\n" +
+                "</env:Envelope>";
+
+
+        var client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .build();
+        var request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(message))
+                .uri(new URI("https://192.168.179.128:5550/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .build();
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenAccept(System.out::println)
+                .join();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.statusCode());
+
+        // print response body
+        System.out.println(response.body());
     }
 
 }

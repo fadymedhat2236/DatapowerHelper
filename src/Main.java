@@ -1,8 +1,11 @@
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
 
-
+        /*
         //first create service folders
         DealingWithFiles.createServiceFolders();;
 
@@ -16,5 +19,7 @@ public class Main {
 
         DPScripts.generateStubConfiguration();
         DPScripts.generateWSPConfiguration();
+         */
+        RequestsHelper.CreateFolder("local:///test/temp");
     }
 }
