@@ -5,7 +5,23 @@ import urllib3
 import re
 import xml.dom.minidom
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-   
+
+#for the constants
+
+url="https://192.168.179.128:5550"
+username="admin"
+password="idgadmin"
+domainName="7ablas"
+path = "D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP"
+
+def getFolderNames():
+    folders= glob.glob(path + '/*/')
+    f=[]
+    for folder in folders:
+        folder=folder.split('\\')
+    f.append('local:///'+domainName+'/'+folder[len(folder)-2])
+    return f
+
 def getAll(url, username, password, domainName, path ):
     oldFiles = glob.glob(path + '/**/*.*', recursive=True)
     folders = []
@@ -18,14 +34,38 @@ def getAll(url, username, password, domainName, path ):
     folders = list(set(folders))
     return folders, files
 
-def addFolder(folderPaths):
+def deleteFolders():
+    f = getFolderNames()
+    folders=""
+    for folder in f:
+        folders = folders + ' <RemoveDir><Dir>'+folder+'</Dir></RemoveDir>\n'
+
+    xmlTemplate = '''<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+	                    <env:Body>
+		                    <dp:request xmlns:dp="http://www.datapower.com/schemas/management">
+			                    <dp:do-action>
+				                    '''+folders+'''
+			                    </dp:do-action>
+		                    </dp:request>
+	                    </env:Body>
+                    </env:Envelope>'''
+    r = requests.post(url, auth=(username, password), data=xmlTemplate, verify=False)
+    if r.status_code == 200:
+        if 'OK' in r.text:
+            print('Deleted successfully')
+        else:
+            print('Deleted failed')
+    else:
+        print('connectionError')
+
+def addFolders(folderPaths):
     folders = ""
     for folder in folderPaths:
         folders = folders + ' <CreateDir><Dir>'+folder+'</Dir></CreateDir>\n'
 
     xmlTemplate = '''<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
 	                    <env:Body>
-		                    <dp:request domain="default" xmlns:dp="http://www.datapower.com/schemas/management">
+		                    <dp:request xmlns:dp="http://www.datapower.com/schemas/management">
 			                    <dp:do-action>
                                     '''+folders+'''
 			                    </dp:do-action>
@@ -41,7 +81,7 @@ def addFolder(folderPaths):
     else:
         print('connectionError')
 
-def addFile(files):
+def addFiles(files):
     filesRequest = ""
     for eachFile in files:
         with open(eachFile['local'], 'rb') as lines:
@@ -67,14 +107,7 @@ def addFile(files):
     else:
         print('connectionError')
 
-
-url="https://192.168.179.128:5550"
-username="admin"
-password="idgadmin"
-domainName="SABB"
-path = "D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP"
 folders, files = getAll(url, username, password, domainName, path)
-addFolder(folders)
-addFile(files)
-
-
+deleteFolders()
+addFolders(folders)
+addFiles(files)
