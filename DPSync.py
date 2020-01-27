@@ -13,6 +13,7 @@ username="admin"
 password="idgadmin"
 domainName="7ablas"
 path = "D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP"
+xmlManager="default"
 
 def getFolderNames():
     folders= glob.glob(path + '/*/')
@@ -45,6 +46,12 @@ def deleteFolders():
 		                    <dp:request xmlns:dp="http://www.datapower.com/schemas/management">
 			                    <dp:do-action>
 				                    '''+folders+'''
+				                    <FlushDocumentCache>
+					                    <XMLManager>'''+xmlManager+'''</XMLManager>
+				                    </FlushDocumentCache>
+				                    <FlushStylesheetCache>
+                                        <XMLManager>'''+xmlManager+'''</XMLManager>
+                                    </FlushStylesheetCache>
 			                    </dp:do-action>
 		                    </dp:request>
 	                    </env:Body>
