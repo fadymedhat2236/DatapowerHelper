@@ -11,7 +11,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 url="https://192.168.179.128:5550"
 username="admin"
 password="idgadmin"
-domainName="7ablas"
+domainName="SABB"
 path = "D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP"
 xmlManager="default"
 
@@ -20,7 +20,7 @@ def getFolderNames():
     f=[]
     for folder in folders:
         folder=folder.split('\\')
-    f.append('local:///'+domainName+'/'+folder[len(folder)-2])
+        f.append('local:///'+domainName+'/'+folder[len(folder)-2])
     return f
 
 def getAll(url, username, password, domainName, path ):

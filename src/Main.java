@@ -36,8 +36,8 @@ public class Main {
         DPScripts.generateStubConfiguration();
         DPScripts.generateWSPConfiguration();
          */
-        System.out.println(GetMapping.Execute("C:\\Users\\fmedhat\\Desktop\\input.xml","C:\\Users\\fmedhat\\Desktop\\output.xml"));
-
+        System.out.println(Constants.beginXSL+GetMapping.Execute("C:\\Users\\fmedhat\\Desktop\\input.xml","C:\\Users\\fmedhat\\Desktop\\output.xml")+Constants.endXSL);
+        //System.out.println(Constants.requestTemplate);
     }
 
 }

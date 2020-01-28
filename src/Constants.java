@@ -166,72 +166,42 @@ public class Constants {
             "</xsl:stylesheet>";
 
     /***************  CreateService  ************/
-
-
     public static String BEGIN_CHOOSE = "<!--****begin choose ****-->";
     public static String END_CHOOSE = "<!--****end   choose ****-->";
     public static String BEGIN_NOT_FOUND = "<!--****begin not found ****-->";
     public static String END_NOT_FOUND = "<!--****end   not found ****-->";
-    public static String WRITE_HERE = "<!-- Write Here -->";
-
     public static String START_TAG_OPEN = "<";
-    public static String START_TAG_CLOSE = ">";
-    public static String END_TAG_OPEN = "</";
     public static String END_TAG_CLOSE = ">";
     public static String DOUBLE_QUOTES = "\"";
     public static String SPACE = " ";
     public static String NEW_LINE = "\r\n";
     public static String FORWARD_SLASH = "/";
-    public static String BACK_SLASH = "\\";
-    public static String TAB = "\t";
     public static String OPEN_BRACKET = "[";
     public static String CLOSED_BRACKET = "]";
     public static String ASTERISK = "*";
     public static String SINGLE_QUOTE = "'";
-    public static String DOT = ".";
-    public static String DASH = "-";
-
-
-    public static String B2B = "B2B";
-    public static String ELM = "ELM";
     public static String XML_VERSION = "<\\?xml version=\"1.0\" encoding=\"UTF-8\"\\?>";
-    public static String XML = "xml";
-    public static String XSL = "xsl";
-    public static String ERR = "Err";
-    public static String RQ = "Rq";
-    public static String RS = "Rs";
     public static String XSL_VALUE = "xsl:value-of";
-    public static String XSL_COPY = "xsl:copy-of";
     public static String SELECT = "select=";
-    public static String TARGET = "target=";
-    public static String USR_DEF =  "a:UsrDef";
     public static String LOCAL_NAME = "local-name()=";
-    public static String B2B_YAKEEN_INQ = "B2BYakeenInq";
-    public static String OUTBOUND = "outbound";
 
+    public static final String XMLFilesfixedPath="C:\\Users\\fmedhat\\Desktop\\";
+    public static final String beginXSL="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n" +
+            "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
+            "    xmlns:dp=\"http://www.datapower.com/extensions\"\n" +
+            "    xmlns:dpconfig=\"http://www.datapower.com/param/config\"\n" +
+            "    xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n" +
+            "    extension-element-prefixes=\"dp\" \n" +
+            "    exclude-result-prefixes=\"xs dp dpconfig\"\n" +
+            "    version=\"2.0\">\n" +
+            "\t<xsl:import href=\"local:/Framework/LIBS/UTIL.xsl\" dp:ignore-multiple=\"yes\"/>\n" +
+            "\t<xsl:template match=\"/\">";
+    public static final String endXSL="\t</xsl:template>\n" +
+            "</xsl:stylesheet>";
+    public static final String inputRequest="inputRequest";
+    public static final String outputRequest="outputRequest";
+    public static final String inputResponse="inputResponse";
+    public static final String outputResponse="outputResponse";
 
-    public static String CONFIGURATION = "CONFIGURATION";
-    public static String TRANSFORMATION = "TRANSFORMATION";
-    public static String AUDIT_VARS = "AUDIT_VARS";
-    public static String ENDPOINT = "ENDPOINTS";
-
-
-    public static String templateHelperFolderPath = "E:\\data\\DP\\Helper";
-
-    public static String templateAuditVarsFileName= "AUDIT_VARS_StartTemplate.xml";
-    public static String templateConfigurationFileName = "CONFIGURATION_StartTemplate.xml";
-    public static String templateEndpointsFileName= "ENDPOINTS_StartTemplate.xml";
-    public static String templateErrorFileName = "ErrStartTemplate.xsl";
-    public static String templateRequestFileName = "RqStartTemplate.xsl";
-    public static String templateResponseFileName = "RsStartTemplate.xsl";
-
-    public static String templateAuditVarsFilePath;
-    public static String templateConfigurationFilePath ;
-    public static String templateEndpointsFilePath;
-    public static String templateRequestFilePath;
-    public static String templateResponseFilePath;
-    public static String templateErrorFilePath;
-    public static ArrayList<String> allTemplateServiceFilesPaths;
-
-    /***************  CreateService  ************/
 }

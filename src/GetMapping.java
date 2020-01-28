@@ -11,10 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
-
 public class GetMapping {
-    public static NodeList ParseXMLFile(String filePath)
-    {
+    public static NodeList ParseXMLFile(String filePath) {
         try
         {
             File File = new File(filePath);
@@ -26,7 +24,6 @@ public class GetMapping {
             NodeList nodeList = Doc.getElementsByTagName(Constants.ASTERISK);
             return nodeList;
         }
-
         catch (Exception e)
         {
             e.printStackTrace();
@@ -53,33 +50,27 @@ public class GetMapping {
         return false;
     }
 
-    public static String XMLToString(NodeList nodeList) throws IOException
-    {
+    public static String XMLToString(NodeList nodeList) throws IOException {
         String result="";
-
         try
         {
             StringWriter sw = new StringWriter();
             Transformer serializer = TransformerFactory.newInstance().newTransformer();
             serializer.transform(new DOMSource(nodeList.item(0)), new StreamResult(sw));
             result = sw.toString();
-
             return RemoveXSLAmbigousChars(result);
-
         }
-
         catch (Exception e)
         {
             e.printStackTrace();
         }
         return result;
     }
-    public static String RemoveXSLAmbigousChars(String mapping)
-    {
+
+    public static String RemoveXSLAmbigousChars(String mapping) {
         mapping = mapping.replaceAll("&lt;" , Constants.START_TAG_OPEN);
         mapping = mapping.replaceAll("&gt;" , Constants.END_TAG_CLOSE);
         mapping = mapping.replaceAll("&#13;" , Constants.NEW_LINE);
-
         return  mapping;
     }
 
