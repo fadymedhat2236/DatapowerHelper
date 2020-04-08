@@ -1,7 +1,9 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.rmi.UnexpectedException;
 
 public class DealingWithFiles {
 
@@ -25,6 +27,12 @@ public class DealingWithFiles {
         bool = file.mkdir();
 
         path = Constants.serviceFilesPath+"/"+Constants.serviceName+"/temp";
+        //Creating a File object
+        file = new File(path);
+        //Creating the directory
+        bool = file.mkdir();
+
+        path = Constants.stubsFilesPath+"/"+Constants.serviceName+"_Stub";
         //Creating a File object
         file = new File(path);
         //Creating the directory

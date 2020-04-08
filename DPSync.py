@@ -46,12 +46,6 @@ def deleteFolders():
 		                    <dp:request xmlns:dp="http://www.datapower.com/schemas/management">
 			                    <dp:do-action>
 				                    '''+folders+'''
-				                    <FlushDocumentCache>
-					                    <XMLManager>'''+xmlManager+'''</XMLManager>
-				                    </FlushDocumentCache>
-				                    <FlushStylesheetCache>
-                                        <XMLManager>'''+xmlManager+'''</XMLManager>
-                                    </FlushStylesheetCache>
 			                    </dp:do-action>
 		                    </dp:request>
 	                    </env:Body>
@@ -114,7 +108,33 @@ def addFiles(files):
     else:
         print('connectionError')
 
+def flush():
+    xmlTemplate = '''<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+	                    <env:Body>
+		                    <dp:request domain="'''+domainName+'''" xmlns:dp="http://www.datapower.com/schemas/management">
+			                    <dp:do-action>
+				                    <FlushStylesheetCache>
+					                    <XMLManager>'''+xmlManager+'''</XMLManager>
+				                    </FlushStylesheetCache>
+				                    <FlushDocumentCache>
+					                    <XMLManager>'''+xmlManager+'''</XMLManager>
+				                    </FlushDocumentCache>
+			                    </dp:do-action>
+		                    </dp:request>
+	                    </env:Body>
+                    </env:Envelope>'''
+    r = requests.post(url, auth=(username, password), data=xmlTemplate, verify=False)
+    if r.status_code == 200:
+        if 'OK' in r.text:
+            print('flushed successfully')
+        else:
+            print('flushing failed')
+    else:
+        print('connectionError')
+
+
 folders, files = getAll(url, username, password, domainName, path)
 deleteFolders()
 addFolders(folders)
 addFiles(files)
+flush()

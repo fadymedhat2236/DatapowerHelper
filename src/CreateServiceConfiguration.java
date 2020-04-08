@@ -183,7 +183,7 @@ public class CreateServiceConfiguration {
             Element userDefined=document.createElement("a:UsrDef11");
             service.appendChild(userDefined);
             attr = document.createAttribute("target");
-            attr.setValue("IRPLY");
+            attr.setValue("RPLY");
             userDefined.setAttributeNode(attr);
             String path="//*[local-name()='"+Constants.errorPaths[0]+"']";
             userDefined.appendChild(document.createTextNode(path));

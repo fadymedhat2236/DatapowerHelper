@@ -1,14 +1,14 @@
-import java.util.ArrayList;
-
 public class Constants {
-    public static final String serviceName="B2BPROMng";
-    public static final String backendName="ESB";
+    public static final String serviceName="B2BiWalletRconRprt";
+    public static final String backendName="TABADUL";
     public static final String domainURL="https://192.168.179.128:9090";
-    public static final String WSDLFragmentID="http://www.Ejada.com";
+    public static final String WSDLFragmentID="http://www.SABB.com/iWallet/";
+    public static final String partner="Tabadul";
     //for the files
     public static final String serviceFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Services\\";
-    public static final String StubMatchXpath="EPmtSPMngRq";
-    public static final String StubFSHPort="2241";
+    public static final String stubsFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Stubs\\";
+    public static final String StubMatchXpath="iWalletRconRprtRq";
+    public static final String StubFSHPort="3226";
 
     //Configuration file
     public static final String AUDIT_FLG="true";
@@ -18,63 +18,29 @@ public class Constants {
     public static final String DUMP_RESPONSE_FLG="true";
 
     //endpoints file
-    public static final String EP_ID[]={"ESB-B2BPROMng","ESB-B2BPROMng"};
-    public static final String EP_PROTOCOL[]={"HTTP","MQ"};
-    public static final String EP_REQUEST[]={"http://192.168.179.128:"+Constants.StubFSHPort,"B2BPROMngRq"};
-    public static final String EP_RESPONSE[]={null,"B2BPROMngRs"};
-    public static final String EP_QMGR="EAIQMGR";
+    public static final String EP_ID[]={"TABADUL-B2BiWalletRconRprt"};
+    public static final String EP_PROTOCOL[]={"HTTP"};
+    public static final String EP_REQUEST[]={"http://192.168.179.128:"+Constants.StubFSHPort};
+    public static final String EP_RESPONSE[]={null,"B2BiWalletComplaintMng"};
+    public static final String EP_QMGR="DPQMGR_GP";
     public static final String EP_EXPIRY="25000";
     public static final String EP_TIMEOUT="30000";
 
     //auditVARS file
-    public static final String auditVars[][] ={{"UsrDef1","REQ","AcctNum"},{"UsrDef2","REQ","FromDt"},{"UsrDef3","REQ","ToDt"},{"UsrDef4","IRPLY","ReceiptDt"}};
+    //,{"UsrDef4","IRPLY","ReceiptDt"}
+    public static final String auditVars[][] ={{"UsrDef1","REQ","CutoffMsgId"}};
     //for the error mapping
-
-    public static final String BEFixedPath="//*[local-name()='Header']/*[local-name()='ISMHdr']/*[local-name()='RespeCde']/*";
-    public static final String FixedPath="//*[local-name()='Body']/*";
-    public static final String errorPaths[]={"RtrnCde","ReasCde","DiagText","StatusCode","StatusDetails"};
+    public static final String BEFixedPath="//*[local-name()='MsgRsHdr']/*[local-name()='ResponseStatus']/*";
+    public static final String FixedPath="//*[local-name()='Header']/*[local-name()='ISMHdr']/*[local-name()='RespeCde']/*";
+    public static final String errorPaths[]={"RtrnCde","StatusCode","StatusDetail","ReasCde","DiagText"};
 
 
     //transformation files
-    public static final String requestTemplate="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n" +
-            "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-            "    xmlns:dp=\"http://www.datapower.com/extensions\"\n" +
-            "    xmlns:dpconfig=\"http://www.datapower.com/param/config\"\n" +
-            "    xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n" +
-            "\n" +
-            "    extension-element-prefixes=\"dp\" \n" +
-            "    exclude-result-prefixes=\"xs dp dpconfig\"\n" +
-            "    version=\"2.0\">\n" +
-            "    <xsl:import href=\"local:/Framework/LIBS/UTIL.xsl\" dp:ignore-multiple=\"yes\"/>\n" +
-            "    <xsl:template match=\"/\">\n" +
-            "\n" +
-            "        <xsl:call-template name=\"save-SABB-header\">\n" +
-            "            <xsl:with-param name=\"msg\" select=\"*\"/>\n" +
-            "        </xsl:call-template>\n" +
-            "        \n" +
-            "    </xsl:template>\n" +
-            "</xsl:stylesheet>";
-    public static final String responseTemplate="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n" +
-            "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-            "    xmlns:dp=\"http://www.datapower.com/extensions\"\n" +
-            "    xmlns:dpconfig=\"http://www.datapower.com/param/config\"\n" +
-            "    xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n" +
-            "    xmlns:tem=\"http://tempuri.org/\"\n" +
-            "    xmlns:wat=\"http://schemas.datacontract.org/2004/07/WatheqWS\"\n" +
-            "    xmlns:e=\"http://schemas.datacontract.org/2004/07/E_Deposit\" xmlns:ned=\"nEdeposite\"\n" +
-            "    extension-element-prefixes=\"dp\" \n" +
-            "    exclude-result-prefixes=\"xs dp dpconfig soapenv\" version=\"2.0\">\n" +
-            "    <xsl:import href=\"local:/Framework/LIBS/UTIL.xsl\" dp:ignore-multiple=\"yes\"/>\n" +
-            "    <xsl:template match=\"/\">\n" +
-            "        <xsl:variable name=\"functionID\">\n" +
-            "            <xsl:copy-of select=\"dp:variable('var://context/Outbound/OpHdr')\"/>\n" +
-            "        </xsl:variable>\n" +
-            "        <xsl:variable name=\"functionID\" select=\"$functionID/OpHdr/OpDefin/OpId\"/>\n" +
-            "\t\t\n" +
-            "    </xsl:template>\n" +
-            "</xsl:stylesheet>\n";
+    public static final String XMLFilesfixedPath="D:\\Projects\\SABB\\Sample_Messages\\GCC Fees Inquiry\\";
+    public static final String inputRequest="inputRequest.xml";
+    public static final String outputRequest="outputRequest.xml";
+    public static final String inputResponse="inputResponse.xml";
+    public static final String outputResponse="outputResponse.xml";
     public static final String errorTemplate="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n" +
             "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:ejd=\"http://www.ejada.com\"\n" +
@@ -185,7 +151,7 @@ public class Constants {
     public static String SELECT = "select=";
     public static String LOCAL_NAME = "local-name()=";
 
-    public static final String XMLFilesfixedPath="C:\\Users\\fmedhat\\Desktop\\";
+
     public static final String beginXSL="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n" +
             "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
@@ -195,13 +161,10 @@ public class Constants {
             "    extension-element-prefixes=\"dp\" \n" +
             "    exclude-result-prefixes=\"xs dp dpconfig\"\n" +
             "    version=\"2.0\">\n" +
-            "\t<xsl:import href=\"local:/Framework/LIBS/UTIL.xsl\" dp:ignore-multiple=\"yes\"/>\n" +
+            "\t<xsl:import href=\"local:/Services/LIBS/UTIL.xsl\" dp:ignore-multiple=\"yes\"/>\n" +
             "\t<xsl:template match=\"/\">";
     public static final String endXSL="\t</xsl:template>\n" +
             "</xsl:stylesheet>";
-    public static final String inputRequest="inputRequest";
-    public static final String outputRequest="outputRequest";
-    public static final String inputResponse="inputResponse";
-    public static final String outputResponse="outputResponse";
+
 
 }

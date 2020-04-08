@@ -723,7 +723,7 @@ public class DPScripts {
                 "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
-                "\t\t\t<WsdlURL>local:///SchemaLib/Partner/serviceName.wsdl</WsdlURL>\n" +
+                "\t\t\t<WsdlURL>local:///SchemaLib/Services/serviceName.wsdl</WsdlURL>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<Transactional>off</Transactional>\n" +
                 "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
@@ -1364,7 +1364,7 @@ public class DPScripts {
                 "\t\t\t\t<TotalRetries>1</TotalRetries>\n" +
                 "\t\t\t</RemoteFetchRetry>\n" +
                 "\t\t\t<BaseWSDL>\n" +
-                "\t\t\t\t<WSDLSourceLocation>local:///SchemaLib/Partner/serviceName.wsdl</WSDLSourceLocation>\n" +
+                "\t\t\t\t<WSDLSourceLocation>local:///SchemaLib/Services/serviceName.wsdl</WSDLSourceLocation>\n" +
                 "\t\t\t\t<WSDLName>serviceName.wsdl</WSDLName>\n" +
                 "\t\t\t\t<PolicyAttachments class=\"PolicyAttachments\">serviceName_serviceName.wsdl</PolicyAttachments>\n" +
                 "\t\t\t</BaseWSDL>\n" +
@@ -1402,7 +1402,7 @@ public class DPScripts {
                 "\t</configuration>\n" +
                 "</datapower-configuration>";
         temp=temp.replaceAll("serviceName",Constants.serviceName);
-        temp=temp.replaceAll("Partner","Musaned");
+        temp=temp.replaceAll("Partner",Constants.partner);
         temp=temp.replaceAll("FID",Constants.WSDLFragmentID);
         String path=Constants.serviceFilesPath+Constants.serviceName+"/temp/WSPconfig.xml";
         DealingWithFiles.writeToFile(temp,path);
