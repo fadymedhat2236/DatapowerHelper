@@ -1692,6 +1692,7 @@ public class DPScripts {
         temp=temp.replaceAll("StubFSHPort",Constants.StubFSHPort);
         temp=temp.replaceAll("matchXpath",Constants.StubMatchXpath);
         String path=Constants.serviceFilesPath+Constants.serviceName+"/temp/Stubconfig.xml";
+        //String path=Constants.serviceFilesPath+"/Stubconfig.xml";
         DealingWithFiles.writeToFile(temp,path);
     }
 
