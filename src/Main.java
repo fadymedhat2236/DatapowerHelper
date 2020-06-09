@@ -11,19 +11,22 @@ public class Main {
 
 
         /*******************first create service folders*******************/
-        DealingWithFiles.createServiceFolders();
+        //DealingWithFiles.createServiceFolders();
 
         /*******************for the configuration files*******************/
-        CreateServiceConfiguration.createConfigurationFile();
-        CreateServiceConfiguration.createEndPointsFile();
-        CreateServiceConfiguration.createauditVarsFile();
+        //CreateServiceConfiguration.createConfigurationFile();
+        //CreateServiceConfiguration.createEndPointsFile();
+        //CreateServiceConfiguration.createauditVarsFile();
 
         /*******************for the transformtion templates*******************/
-        CreateServiceTransformation.createTransformationTemplates();
+        //CreateServiceTransformation.createTransformationTemplates();
 
-        DPScripts.generateStubConfiguration();
-        DPScripts.generateMPGWConfiguration();
+        //DPScripts.generateStubConfiguration();
+        //DPScripts.generateMPGWConfiguration();
         //DPScripts.generateWSPConfiguration();
+
+        //GetMapping.returnTablesMapping("D:\\Test\\RequestInput.xml","D:\\Test\\RequestOutput.xml");
+        System.out.println(GetMapping.Execute("D:\\Test\\RequestInput.xml","D:\\Test\\RequestOutput.xml"));
     }
 
 }

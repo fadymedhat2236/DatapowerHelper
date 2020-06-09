@@ -1,6 +1,7 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -31,16 +32,32 @@ public class GetMapping {
         return null;
     }
 
+    public static String getAttributeXPath(Node node){
+        if(!node.hasAttributes())
+            return "";
+        String s="";
+        for(int i=0;i<node.getAttributes().getLength();i++){
+            Node temp=node.getAttributes().item(i);
+            String key=temp.getNodeName();
+            String value=temp.getTextContent();
+            s=s+"@"+key+"='"+value+"'";
+            if(i!=node.getAttributes().getLength()-1)
+                s=s+" and ";
+        }
+        s="["+s+"]";
+        return s;
+    }
+
     public static String getXPath(Node node) {
         Node parent = node.getParentNode();
         Node grandParent = parent.getParentNode();
-
+        String s=getAttributeXPath(node);
         if (grandParent == null) {
             return Constants.FORWARD_SLASH + Constants.FORWARD_SLASH + Constants.ASTERISK  + Constants.OPEN_BRACKET + Constants.LOCAL_NAME +
                     Constants.SINGLE_QUOTE+ node.getLocalName() + Constants.SINGLE_QUOTE + Constants.CLOSED_BRACKET;
         }
         return getXPath(parent) + Constants.FORWARD_SLASH + Constants.ASTERISK + Constants.OPEN_BRACKET + Constants.LOCAL_NAME +
-                Constants.SINGLE_QUOTE+ node.getLocalName() + Constants.SINGLE_QUOTE + Constants.CLOSED_BRACKET;
+                Constants.SINGLE_QUOTE+ node.getLocalName() + Constants.SINGLE_QUOTE + Constants.CLOSED_BRACKET+s;
     }
 
     public static Boolean IsLeaf(Node node) {
@@ -81,7 +98,7 @@ public class GetMapping {
                 NodeList opNodeList = ParseXMLFile(opFilePath);
                 NodeList ipNodeList = ParseXMLFile(ipFilePath);
 
-// nodeList is not iterable, so we are using for loop
+                // nodeList is not iterable, so we are using for loop
                 for (int itr = 0; itr < opNodeList.getLength(); itr++) {
 
                     int flag = 0;
@@ -131,4 +148,62 @@ public class GetMapping {
             }
             return "";
         }
+    public static void returnTablesMapping(String ipFilePath, String opFilePath) {
+
+        try {
+
+            NodeList opNodeList = ParseXMLFile(opFilePath);
+            NodeList ipNodeList = ParseXMLFile(ipFilePath);
+
+            // nodeList is not iterable, so we are using for loop
+            for (int itr = 0; itr < opNodeList.getLength(); itr++) {
+                int flag = 0;
+                String res = "";
+
+                Node opNode = opNodeList.item(itr);
+                if (IsLeaf(opNode)) {
+
+                    String opText = opNode.getTextContent();
+
+                    for (int itr2 = 0; itr2 < ipNodeList.getLength(); itr2++) {
+                        Node ipNode = ipNodeList.item(itr2);
+
+                        if (opText.equals(ipNode.getTextContent())) {
+
+                            if (flag > 0)
+                                res += Constants.NEW_LINE;
+
+                            flag++;
+                            res +=getAbsXpath(ipNode);
+                        }
+                    }
+                    System.out.println(getAbsXpath(opNode)+","+res);
+                    //System.out.println(opNode.getAttributes().item(0).getTextContent());
+                }
+                if (flag > 1) {
+                    res = Constants.BEGIN_CHOOSE + res + Constants.END_CHOOSE;
+                    opNodeList.item(itr).setTextContent(res);
+
+                } else if (flag == 1) {
+                    opNodeList.item(itr).setTextContent(res);
+                } else {
+                    res = Constants.BEGIN_NOT_FOUND + res + Constants.END_NOT_FOUND;
+                }
+
+                flag = 0;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static String getAbsXpath(Node node) {
+        Node parent = node.getParentNode();
+        Node grandParent = parent.getParentNode();
+
+        if (grandParent == null) {
+            return Constants.FORWARD_SLASH + node.getLocalName();
+        }
+        return getAbsXpath(parent) + Constants.FORWARD_SLASH + node.getLocalName();
+    }
 }

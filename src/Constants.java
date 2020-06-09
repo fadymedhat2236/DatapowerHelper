@@ -1,5 +1,5 @@
 public class Constants {
-    public static final String serviceName="B2BREDFSubsidyInq";
+    public static final String serviceName="B2BREDFCustMng";
     public static final String backendName="REDF";
     public static final String domainURL="https://192.168.179.128:9090";
     public static final String WSDLFragmentID="http://www.SABB.com/iWallet/";
@@ -8,7 +8,7 @@ public class Constants {
     public static final String serviceFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Services\\";
     public static final String stubsFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Stubs\\";
     public static final String StubMatchXpath="getCalculaterV2";
-    public static final String StubFSHPort="3126";
+    public static final String StubFSHPort="3143";
 
     //Configuration file
     public static final String AUDIT_FLG="true";
@@ -18,7 +18,7 @@ public class Constants {
     public static final String DUMP_RESPONSE_FLG="true";
 
     //endpoints file
-    public static final String EP_ID[]={"REDF-B2BREDFSubsidyInq"};
+    public static final String EP_ID[]={"REDF-B2BREDFCustMng"};
     public static final String EP_PROTOCOL[]={"HTTP"};
     public static final String EP_REQUEST[]={"http://192.168.179.128:"+Constants.StubFSHPort};
     public static final String EP_RESPONSE[]={null,"B2BiWalletComplaintMng"};
@@ -28,7 +28,7 @@ public class Constants {
 
     //auditVARS file
     //,{"UsrDef4","IRPLY","ReceiptDt"}
-    public static final String auditVars[][] ={{"UsrDef1","REQ","POINum"},{"UsrDef2","REQ","RealEstatePrice"},{"UsrDef3","REQ","DownPayment"}};
+    public static final String auditVars[][] ={{"UsrDef1","REQ","OpId"},{"UsrDef2","REQ","POINum"},{"UsrDef3","REQ","SchedId"}};
     //for the error mapping
     public static final String BEFixedPath="//*[local-name()='MsgRsHdr']/*[local-name()='ResponseStatus']/*";
     public static final String FixedPath="//*[local-name()='Header']/*[local-name()='ISMHdr']/*[local-name()='RespeCde']/*";

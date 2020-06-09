@@ -8,7 +8,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 #for the constants
 
-url="https://192.168.179.128:5550"
+url="https://192.168.116.128:5550"
 username="admin"
 password="idgadmin"
 domainName="SABB"
