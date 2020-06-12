@@ -1,14 +1,16 @@
+import java.util.HashMap;
+
 public class Constants {
-    public static final String serviceName="B2BREDFCustMng";
-    public static final String backendName="REDF";
-    public static final String domainURL="https://192.168.179.128:9090";
+    public static final String serviceName="B2BEKAccrualNotification";
+    public static final String backendName="EK";
+    public static final String domainURL="https://192.168.116.128:9090";
     public static final String WSDLFragmentID="http://www.SABB.com/iWallet/";
-    public static final String partner="Tabadul";
+    public static final String partner="EK";
     //for the files
     public static final String serviceFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Services\\";
     public static final String stubsFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Stubs\\";
     public static final String StubMatchXpath="getCalculaterV2";
-    public static final String StubFSHPort="3143";
+    public static final String StubFSHPort="3242";
 
     //Configuration file
     public static final String AUDIT_FLG="true";
@@ -18,9 +20,9 @@ public class Constants {
     public static final String DUMP_RESPONSE_FLG="true";
 
     //endpoints file
-    public static final String EP_ID[]={"REDF-B2BREDFCustMng"};
+    public static final String EP_ID[]={"EK-B2BEKAccrualNotification"};
     public static final String EP_PROTOCOL[]={"HTTP"};
-    public static final String EP_REQUEST[]={"http://192.168.179.128:"+Constants.StubFSHPort};
+    public static final String EP_REQUEST[]={"http://127.0.0.1:"+Constants.StubFSHPort};
     public static final String EP_RESPONSE[]={null,"B2BiWalletComplaintMng"};
     public static final String EP_QMGR="DPQMGR_GP";
     public static final String EP_EXPIRY="25000";
@@ -28,7 +30,7 @@ public class Constants {
 
     //auditVARS file
     //,{"UsrDef4","IRPLY","ReceiptDt"}
-    public static final String auditVars[][] ={{"UsrDef1","REQ","OpId"},{"UsrDef2","REQ","POINum"},{"UsrDef3","REQ","SchedId"}};
+    public static final String auditVars[][] ={{"UsrDef1","RPLY","ExternalBatchID"}};
     //for the error mapping
     public static final String BEFixedPath="//*[local-name()='MsgRsHdr']/*[local-name()='ResponseStatus']/*";
     public static final String FixedPath="//*[local-name()='Header']/*[local-name()='ISMHdr']/*[local-name()='RespeCde']/*";
@@ -157,7 +159,6 @@ public class Constants {
             "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
             "    xmlns:dp=\"http://www.datapower.com/extensions\"\n" +
             "    xmlns:dpconfig=\"http://www.datapower.com/param/config\"\n" +
-            "    xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n" +
             "    extension-element-prefixes=\"dp\" \n" +
             "    exclude-result-prefixes=\"xs dp dpconfig\"\n" +
             "    version=\"2.0\">\n" +
@@ -165,6 +166,40 @@ public class Constants {
             "\t<xsl:template match=\"/\">";
     public static final String endXSL="\t</xsl:template>\n" +
             "</xsl:stylesheet>";
+    public static HashMap<String,String> getConditionTags(boolean direction){
+        HashMap <String,String> conditionTags = new HashMap<String,String>();
 
+        //0 for request 1 for response
+        if(direction==false){
+            conditionTags.put("json:string1","channelCode");
+            conditionTags.put("json:string2","enrolmentMethod");
+            conditionTags.put("json:string3","membershipType");
+            conditionTags.put("json:string4","title");
+            conditionTags.put("json:string5","firstName");
+            conditionTags.put("json:string6","lastName");
+            conditionTags.put("json:string7","dateOfBirth");
+            conditionTags.put("json:string8","gender");
+            conditionTags.put("json:string9","nationality");
+            conditionTags.put("json:string10","emailAddress");
+            conditionTags.put("json:string11","language");
+            conditionTags.put("json:string12","addressType");
+            conditionTags.put("json:string13","town");
+            conditionTags.put("json:string14","postalCode");
+            conditionTags.put("json:string15","country");
+            conditionTags.put("json:string16","preferredContactMethod");
+            conditionTags.put("json:string17","contactType");
+            conditionTags.put("json:string18","isdCode");
+            conditionTags.put("json:string19","contactNumber");
+            conditionTags.put("json:string20","partnerCode");
+            conditionTags.put("json:string21","partnerMembershipNumber");
+            conditionTags.put("json:string22","partnerProductCode");
+            conditionTags.put("json:string23","deDupe");
+        }
+        else{
+
+        }
+        conditionTags.put("DepositDate","");
+        return conditionTags;
+    }
 
 }

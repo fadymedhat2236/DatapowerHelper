@@ -41,6 +41,35 @@ public class DPScripts {
                 "\t\t\t<HTTP2MaxFrameSize>16384</HTTP2MaxFrameSize>\n" +
                 "\t\t\t<HTTP2StreamHeader>off</HTTP2StreamHeader>\n" +
                 "\t\t</HTTPSourceProtocolHandler>\n" +
+                "\t\t<HTTPUserAgent name=\"default\" intrinsic=\"true\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<UserSummary>Default User Agent</UserSummary>\n" +
+                "\t\t\t<MaxRedirects>8</MaxRedirects>\n" +
+                "\t\t\t<Timeout>300</Timeout>\n" +
+                "\t\t</HTTPUserAgent>\n" +
+                "\t\t<XMLManager name=\"default\" intrinsic=\"true\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<UserSummary>Default XML-Manager</UserSummary>\n" +
+                "\t\t\t<CacheSize>256</CacheSize>\n" +
+                "\t\t\t<SHA1Caching>on</SHA1Caching>\n" +
+                "\t\t\t<StaticDocumentCalls>on</StaticDocumentCalls>\n" +
+                "\t\t\t<SearchResults>on</SearchResults>\n" +
+                "\t\t\t<SupportTxWarn>off</SupportTxWarn>\n" +
+                "\t\t\t<Memoization>on</Memoization>\n" +
+                "\t\t\t<ParserLimitsBytesScanned>4194304</ParserLimitsBytesScanned>\n" +
+                "\t\t\t<ParserLimitsElementDepth>512</ParserLimitsElementDepth>\n" +
+                "\t\t\t<ParserLimitsAttributeCount>128</ParserLimitsAttributeCount>\n" +
+                "\t\t\t<ParserLimitsMaxNodeSize>33554432</ParserLimitsMaxNodeSize>\n" +
+                "\t\t\t<ParserLimitsForbidExternalReferences>on</ParserLimitsForbidExternalReferences>\n" +
+                "\t\t\t<ParserLimitsExternalReferences>forbid</ParserLimitsExternalReferences>\n" +
+                "\t\t\t<ParserLimitsMaxPrefixes>1024</ParserLimitsMaxPrefixes>\n" +
+                "\t\t\t<ParserLimitsMaxNamespaces>1024</ParserLimitsMaxNamespaces>\n" +
+                "\t\t\t<ParserLimitsMaxLocalNames>60000</ParserLimitsMaxLocalNames>\n" +
+                "\t\t\t<DocCacheMaxDocs>5000</DocCacheMaxDocs>\n" +
+                "\t\t\t<DocCacheSize>0</DocCacheSize>\n" +
+                "\t\t\t<DocMaxWrites>32768</DocMaxWrites>\n" +
+                "\t\t\t<UserAgent class=\"HTTPUserAgent\">default</UserAgent>\n" +
+                "\t\t</XMLManager>\n" +
                 "\t\t<Matching name=\"ServiceNameRq_MR\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<MatchRules>\n" +
@@ -56,6 +85,38 @@ public class DPScripts {
                 "\t\t\t<MatchWithPCRE>off</MatchWithPCRE>\n" +
                 "\t\t\t<CombineWithOr>off</CombineWithOr>\n" +
                 "\t\t</Matching>\n" +
+                "\t\t<StylePolicyAction name=\"ServiceNameRq_Rule_xform_5\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Type>xform</Type>\n" +
+                "\t\t\t<Input>INPUT</Input>\n" +
+                "\t\t\t<Transform>local:///Framework/REQUEST/INPUT_PROCESSING.xsl</Transform>\n" +
+                "\t\t\t<ParseSettingsReference>\n" +
+                "\t\t\t\t<URL/>\n" +
+                "\t\t\t\t<Literal/>\n" +
+                "\t\t\t\t<Default/>\n" +
+                "\t\t\t</ParseSettingsReference>\n" +
+                "\t\t\t<ParseMetricsResultType>none</ParseMetricsResultType>\n" +
+                "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
+                "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
+                "\t\t\t<Output>NULL</Output>\n" +
+                "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
+                "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
+                "\t\t\t<OutputType>default</OutputType>\n" +
+                "\t\t\t<Transactional>off</Transactional>\n" +
+                "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
+                "\t\t\t<SQLSourceType>static</SQLSourceType>\n" +
+                "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
+                "\t\t\t<Asynchronous>off</Asynchronous>\n" +
+                "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
+                "\t\t\t<RetryCount>0</RetryCount>\n" +
+                "\t\t\t<RetryInterval>1000</RetryInterval>\n" +
+                "\t\t\t<MultipleOutputs>off</MultipleOutputs>\n" +
+                "\t\t\t<IteratorType>XPATH</IteratorType>\n" +
+                "\t\t\t<Timeout>0</Timeout>\n" +
+                "\t\t\t<MethodRewriteType>GET</MethodRewriteType>\n" +
+                "\t\t\t<MethodType>POST</MethodType>\n" +
+                "\t\t\t<MethodType2>POST</MethodType2>\n" +
+                "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyAction name=\"ServiceNameRq_Rule_setvar_0\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<Type>setvar</Type>\n" +
@@ -134,6 +195,38 @@ public class DPScripts {
                 "\t\t\t<MethodType>POST</MethodType>\n" +
                 "\t\t\t<MethodType2>POST</MethodType2>\n" +
                 "\t\t</StylePolicyAction>\n" +
+                "\t\t<StylePolicyAction name=\"ServiceNameRq_Rule_xform_6\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Type>xform</Type>\n" +
+                "\t\t\t<Input>PIPE</Input>\n" +
+                "\t\t\t<Transform>local:///Framework/REQUEST/OUTPUT_PROCESSING.xsl</Transform>\n" +
+                "\t\t\t<ParseSettingsReference>\n" +
+                "\t\t\t\t<URL/>\n" +
+                "\t\t\t\t<Literal/>\n" +
+                "\t\t\t\t<Default/>\n" +
+                "\t\t\t</ParseSettingsReference>\n" +
+                "\t\t\t<ParseMetricsResultType>none</ParseMetricsResultType>\n" +
+                "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
+                "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
+                "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
+                "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
+                "\t\t\t<OutputType>default</OutputType>\n" +
+                "\t\t\t<Transactional>off</Transactional>\n" +
+                "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
+                "\t\t\t<SQLSourceType>static</SQLSourceType>\n" +
+                "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
+                "\t\t\t<Asynchronous>off</Asynchronous>\n" +
+                "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
+                "\t\t\t<RetryCount>0</RetryCount>\n" +
+                "\t\t\t<RetryInterval>1000</RetryInterval>\n" +
+                "\t\t\t<MultipleOutputs>off</MultipleOutputs>\n" +
+                "\t\t\t<IteratorType>XPATH</IteratorType>\n" +
+                "\t\t\t<Timeout>0</Timeout>\n" +
+                "\t\t\t<MethodRewriteType>GET</MethodRewriteType>\n" +
+                "\t\t\t<MethodType>POST</MethodType>\n" +
+                "\t\t\t<MethodType2>POST</MethodType2>\n" +
+                "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyAction name=\"ServiceNameRq_Rule_results_output_0\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<Type>results</Type>\n" +
@@ -173,15 +266,15 @@ public class DPScripts {
                 "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyRule name=\"ServiceNameRq_Rule\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
-                "\t\t\t<Direction>request-Rule</Direction>\n" +
+                "\t\t\t<Direction>request-rule</Direction>\n" +
                 "\t\t\t<InputFormat>none</InputFormat>\n" +
                 "\t\t\t<OutputFormat>none</OutputFormat>\n" +
                 "\t\t\t<NonXMLProcessing>off</NonXMLProcessing>\n" +
                 "\t\t\t<Unprocessed>off</Unprocessed>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">call_INPUT_PROCESSING_REQUEST</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_5</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_setvar_0</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_0</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">call_OUTPUT_PROCESSING_REQUEST</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_6</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_results_output_0</Actions>\n" +
                 "\t\t</StylePolicyRule>\n" +
                 "\t\t<Matching name=\"ServiceNameRs_MR\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
@@ -199,6 +292,38 @@ public class DPScripts {
                 "\t\t\t<MatchWithPCRE>off</MatchWithPCRE>\n" +
                 "\t\t\t<CombineWithOr>off</CombineWithOr>\n" +
                 "\t\t</Matching>\n" +
+                "\t\t<StylePolicyAction name=\"ServiceNameRs_Rule_xform_11\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Type>xform</Type>\n" +
+                "\t\t\t<Input>INPUT</Input>\n" +
+                "\t\t\t<Transform>local:///Framework/RESPONSE/INPUT_PROCESSING.xsl</Transform>\n" +
+                "\t\t\t<ParseSettingsReference>\n" +
+                "\t\t\t\t<URL/>\n" +
+                "\t\t\t\t<Literal/>\n" +
+                "\t\t\t\t<Default/>\n" +
+                "\t\t\t</ParseSettingsReference>\n" +
+                "\t\t\t<ParseMetricsResultType>none</ParseMetricsResultType>\n" +
+                "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
+                "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
+                "\t\t\t<Output>NULL</Output>\n" +
+                "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
+                "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
+                "\t\t\t<OutputType>default</OutputType>\n" +
+                "\t\t\t<Transactional>off</Transactional>\n" +
+                "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
+                "\t\t\t<SQLSourceType>static</SQLSourceType>\n" +
+                "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
+                "\t\t\t<Asynchronous>off</Asynchronous>\n" +
+                "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
+                "\t\t\t<RetryCount>0</RetryCount>\n" +
+                "\t\t\t<RetryInterval>1000</RetryInterval>\n" +
+                "\t\t\t<MultipleOutputs>off</MultipleOutputs>\n" +
+                "\t\t\t<IteratorType>XPATH</IteratorType>\n" +
+                "\t\t\t<Timeout>0</Timeout>\n" +
+                "\t\t\t<MethodRewriteType>GET</MethodRewriteType>\n" +
+                "\t\t\t<MethodType>POST</MethodType>\n" +
+                "\t\t\t<MethodType2>POST</MethodType2>\n" +
+                "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyAction name=\"ServiceNameRs_Rule_validate_0\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<Type>validate</Type>\n" +
@@ -230,7 +355,6 @@ public class DPScripts {
                 "\t\t\t<MethodType>POST</MethodType>\n" +
                 "\t\t\t<MethodType2>POST</MethodType2>\n" +
                 "\t\t</StylePolicyAction>\n" +
-                "\n" +
                 "\t\t<StylePolicyAction name=\"ServiceNameRs_Rule_xform_0\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<Type>xform</Type>\n" +
@@ -258,6 +382,38 @@ public class DPScripts {
                 "\t\t\t<JWEEncAlgorithm>A128CBC-HS256</JWEEncAlgorithm>\n" +
                 "\t\t\t<JOSEVerifyType>identifiers</JOSEVerifyType>\n" +
                 "\t\t\t<JOSEDecryptType>identifiers</JOSEDecryptType>\n" +
+                "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
+                "\t\t\t<Asynchronous>off</Asynchronous>\n" +
+                "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
+                "\t\t\t<RetryCount>0</RetryCount>\n" +
+                "\t\t\t<RetryInterval>1000</RetryInterval>\n" +
+                "\t\t\t<MultipleOutputs>off</MultipleOutputs>\n" +
+                "\t\t\t<IteratorType>XPATH</IteratorType>\n" +
+                "\t\t\t<Timeout>0</Timeout>\n" +
+                "\t\t\t<MethodRewriteType>GET</MethodRewriteType>\n" +
+                "\t\t\t<MethodType>POST</MethodType>\n" +
+                "\t\t\t<MethodType2>POST</MethodType2>\n" +
+                "\t\t</StylePolicyAction>\n" +
+                "\t\t<StylePolicyAction name=\"ServiceNameRs_Rule_xform_12\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Type>xform</Type>\n" +
+                "\t\t\t<Input>PIPE</Input>\n" +
+                "\t\t\t<Transform>local:///Framework/RESPONSE/OUTPUT_PROCESSING.xsl</Transform>\n" +
+                "\t\t\t<ParseSettingsReference>\n" +
+                "\t\t\t\t<URL/>\n" +
+                "\t\t\t\t<Literal/>\n" +
+                "\t\t\t\t<Default/>\n" +
+                "\t\t\t</ParseSettingsReference>\n" +
+                "\t\t\t<ParseMetricsResultType>none</ParseMetricsResultType>\n" +
+                "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
+                "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
+                "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
+                "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
+                "\t\t\t<OutputType>default</OutputType>\n" +
+                "\t\t\t<Transactional>off</Transactional>\n" +
+                "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
+                "\t\t\t<SQLSourceType>static</SQLSourceType>\n" +
                 "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
                 "\t\t\t<Asynchronous>off</Asynchronous>\n" +
                 "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
@@ -309,32 +465,64 @@ public class DPScripts {
                 "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyRule name=\"ServiceNameRs_Rule\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
-                "\t\t\t<Direction>response-Rule</Direction>\n" +
+                "\t\t\t<Direction>response-rule</Direction>\n" +
                 "\t\t\t<InputFormat>none</InputFormat>\n" +
                 "\t\t\t<OutputFormat>none</OutputFormat>\n" +
                 "\t\t\t<NonXMLProcessing>off</NonXMLProcessing>\n" +
                 "\t\t\t<Unprocessed>off</Unprocessed>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">call_INPUT_PROCESSING_RESPONSE</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_xform_11</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_validate_0</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_xform_0</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">call_OUTPUT_PROCESSING_RESPONSE</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_xform_12</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_results_output_0</Actions>\n" +
                 "\t\t</StylePolicyRule>\n" +
                 "\t\t<Matching name=\"ServiceNameErr_MR\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<MatchRules>\n" +
-                "\t\t\t\t<Type>xpath</Type>\n" +
+                "\t\t\t\t<Type>url</Type>\n" +
                 "\t\t\t\t<HttpTag/>\n" +
                 "\t\t\t\t<HttpValue/>\n" +
-                "\t\t\t\t<Url/>\n" +
+                "\t\t\t\t<Url>*</Url>\n" +
                 "\t\t\t\t<ErrorCode/>\n" +
-                "\t\t\t\t<XPATHExpression>*</XPATHExpression>\n" +
+                "\t\t\t\t<XPATHExpression/>\n" +
                 "\t\t\t\t<Method>default</Method>\n" +
                 "\t\t\t\t<CustomMethod/>\n" +
                 "\t\t\t</MatchRules>\n" +
                 "\t\t\t<MatchWithPCRE>off</MatchWithPCRE>\n" +
                 "\t\t\t<CombineWithOr>off</CombineWithOr>\n" +
                 "\t\t</Matching>\n" +
+                "\t\t<StylePolicyAction name=\"ServiceNameErr_Rule_xform_14\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Type>xform</Type>\n" +
+                "\t\t\t<Input>INPUT</Input>\n" +
+                "\t\t\t<Transform>local:///Framework/ERROR/INPUT_PROCESSING.xsl</Transform>\n" +
+                "\t\t\t<ParseSettingsReference>\n" +
+                "\t\t\t\t<URL/>\n" +
+                "\t\t\t\t<Literal/>\n" +
+                "\t\t\t\t<Default/>\n" +
+                "\t\t\t</ParseSettingsReference>\n" +
+                "\t\t\t<ParseMetricsResultType>none</ParseMetricsResultType>\n" +
+                "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
+                "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
+                "\t\t\t<Output>NULL</Output>\n" +
+                "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
+                "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
+                "\t\t\t<OutputType>default</OutputType>\n" +
+                "\t\t\t<Transactional>off</Transactional>\n" +
+                "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
+                "\t\t\t<SQLSourceType>static</SQLSourceType>\n" +
+                "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
+                "\t\t\t<Asynchronous>off</Asynchronous>\n" +
+                "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
+                "\t\t\t<RetryCount>0</RetryCount>\n" +
+                "\t\t\t<RetryInterval>1000</RetryInterval>\n" +
+                "\t\t\t<MultipleOutputs>off</MultipleOutputs>\n" +
+                "\t\t\t<IteratorType>XPATH</IteratorType>\n" +
+                "\t\t\t<Timeout>0</Timeout>\n" +
+                "\t\t\t<MethodRewriteType>GET</MethodRewriteType>\n" +
+                "\t\t\t<MethodType>POST</MethodType>\n" +
+                "\t\t\t<MethodType2>POST</MethodType2>\n" +
+                "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyAction name=\"ServiceNameErr_Rule_xform_0\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<Type>xform</Type>\n" +
@@ -362,6 +550,38 @@ public class DPScripts {
                 "\t\t\t<JWEEncAlgorithm>A128CBC-HS256</JWEEncAlgorithm>\n" +
                 "\t\t\t<JOSEVerifyType>identifiers</JOSEVerifyType>\n" +
                 "\t\t\t<JOSEDecryptType>identifiers</JOSEDecryptType>\n" +
+                "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
+                "\t\t\t<Asynchronous>off</Asynchronous>\n" +
+                "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
+                "\t\t\t<RetryCount>0</RetryCount>\n" +
+                "\t\t\t<RetryInterval>1000</RetryInterval>\n" +
+                "\t\t\t<MultipleOutputs>off</MultipleOutputs>\n" +
+                "\t\t\t<IteratorType>XPATH</IteratorType>\n" +
+                "\t\t\t<Timeout>0</Timeout>\n" +
+                "\t\t\t<MethodRewriteType>GET</MethodRewriteType>\n" +
+                "\t\t\t<MethodType>POST</MethodType>\n" +
+                "\t\t\t<MethodType2>POST</MethodType2>\n" +
+                "\t\t</StylePolicyAction>\n" +
+                "\t\t<StylePolicyAction name=\"ServiceNameErr_Rule_xform_15\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Type>xform</Type>\n" +
+                "\t\t\t<Input>PIPE</Input>\n" +
+                "\t\t\t<Transform>local:///Framework/ERROR/OUTPUT_PROCESSING.xsl</Transform>\n" +
+                "\t\t\t<ParseSettingsReference>\n" +
+                "\t\t\t\t<URL/>\n" +
+                "\t\t\t\t<Literal/>\n" +
+                "\t\t\t\t<Default/>\n" +
+                "\t\t\t</ParseSettingsReference>\n" +
+                "\t\t\t<ParseMetricsResultType>none</ParseMetricsResultType>\n" +
+                "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
+                "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
+                "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
+                "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
+                "\t\t\t<OutputType>default</OutputType>\n" +
+                "\t\t\t<Transactional>off</Transactional>\n" +
+                "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
+                "\t\t\t<SQLSourceType>static</SQLSourceType>\n" +
                 "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
                 "\t\t\t<Asynchronous>off</Asynchronous>\n" +
                 "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
@@ -413,14 +633,14 @@ public class DPScripts {
                 "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyRule name=\"ServiceNameErr_Rule\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
-                "\t\t\t<Direction>error-Rule</Direction>\n" +
+                "\t\t\t<Direction>error-rule</Direction>\n" +
                 "\t\t\t<InputFormat>none</InputFormat>\n" +
                 "\t\t\t<OutputFormat>none</OutputFormat>\n" +
                 "\t\t\t<NonXMLProcessing>off</NonXMLProcessing>\n" +
                 "\t\t\t<Unprocessed>off</Unprocessed>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">call_INPUT_PROCESSING_ERROR</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_14</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_0</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">call_OUTPUT_PROCESSING_ERROR</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_15</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_results_output_0</Actions>\n" +
                 "\t\t</StylePolicyRule>\n" +
                 "\t\t<StylePolicy name=\"ServiceName_Policy\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
@@ -551,6 +771,8 @@ public class DPScripts {
                 "\t\t\t<TransactionTimeout>0</TransactionTimeout>\n" +
                 "\t\t</MultiProtocolGateway>\n" +
                 "\t</configuration>\n" +
+                "\t<files>\n" +
+                "\t</files>\n" +
                 "</datapower-configuration>";
         temp=temp.replaceAll("ServiceName",Constants.serviceName);
         temp=temp.replaceAll("Consumer","SABB");

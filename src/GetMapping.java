@@ -1,4 +1,5 @@
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -11,13 +12,36 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.*;
 
 public class GetMapping {
+    public static NodeList AddConditions(NodeList nodeList,boolean direction){
+        HashMap <String ,String> conditionTags = Constants.getConditionTags(direction);
+        int counter=1;
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node opNode = nodeList.item(i);
+            if ((conditionTags.containsKey(opNode.getNodeName()+counter) && conditionTags.get(opNode.getNodeName())!=" ") ||
+                    (conditionTags.containsKey(opNode.getNodeName()) && conditionTags.get(opNode.getNodeName())==" ")) {
+                conditionTags.remove(opNode.getNodeName());
+                Document doc=opNode.getOwnerDocument();
+                Node parent=opNode.getParentNode();
+                Element test=doc.createElement("xsl:if");
+                Node temp=opNode.cloneNode(true);
+                test.appendChild(temp);
+                parent.replaceChild(test,opNode);
+                nodeList=doc.getElementsByTagName("*");
+                i++;
+            }
+        }
+        return nodeList;
+    }
+
     public static NodeList ParseXMLFile(String filePath) {
         try
         {
             File File = new File(filePath);
             DocumentBuilderFactory Dbf = DocumentBuilderFactory.newInstance();
+            Dbf.setIgnoringComments(false);
             Dbf.setNamespaceAware(true); // to ignore namespaces
             DocumentBuilder Db = Dbf.newDocumentBuilder();
             Document Doc = Db.parse(File);
@@ -51,7 +75,9 @@ public class GetMapping {
     public static String getXPath(Node node) {
         Node parent = node.getParentNode();
         Node grandParent = parent.getParentNode();
-        String s=getAttributeXPath(node);
+        String s="";
+        if(node.hasAttributes())
+            s=getAttributeXPath(node);
         if (grandParent == null) {
             return Constants.FORWARD_SLASH + Constants.FORWARD_SLASH + Constants.ASTERISK  + Constants.OPEN_BRACKET + Constants.LOCAL_NAME +
                     Constants.SINGLE_QUOTE+ node.getLocalName() + Constants.SINGLE_QUOTE + Constants.CLOSED_BRACKET;
@@ -61,7 +87,7 @@ public class GetMapping {
     }
 
     public static Boolean IsLeaf(Node node) {
-        if (node.getChildNodes().getLength() == 1) {
+        if (node.getChildNodes().getLength() == 1 && !node.getNodeName().equals("xsl:if")) {
             return true;
         }
         return false;
@@ -91,24 +117,21 @@ public class GetMapping {
         return  mapping;
     }
 
-    public static String Execute(String ipFilePath, String opFilePath) {
+    public static String Execute(String ipFilePath, String opFilePath,boolean direction) {
 
             try {
-
                 NodeList opNodeList = ParseXMLFile(opFilePath);
+                opNodeList=AddConditions(opNodeList,direction);
                 NodeList ipNodeList = ParseXMLFile(ipFilePath);
-
                 // nodeList is not iterable, so we are using for loop
                 for (int itr = 0; itr < opNodeList.getLength(); itr++) {
-
+                    //System.out.println(opNodeList.item(itr).getNodeName()+"  "+opNodeList.item(itr).getParentNode().getNodeName()+" "+IsLeaf(opNodeList.item(itr)));
                     int flag = 0;
                     String res = "";
-
                     Node opNode = opNodeList.item(itr);
-
                     if (IsLeaf(opNode)) {
                         String opText = opNode.getTextContent();
-
+                        String xPath = "";
                         for (int itr2 = 0; itr2 < ipNodeList.getLength(); itr2++) {
                             Node ipNode = ipNodeList.item(itr2);
 
@@ -123,19 +146,20 @@ public class GetMapping {
                                                 Constants.SELECT +
                                                 Constants.DOUBLE_QUOTES + getXPath(ipNode) + Constants.DOUBLE_QUOTES +
                                                 Constants.FORWARD_SLASH + Constants.END_TAG_CLOSE;
+                                xPath = getXPath(ipNode);
                             }
                         }
-                    }
-                    if (flag > 1) {
-                        res = Constants.BEGIN_CHOOSE + res + Constants.END_CHOOSE;
-                        opNodeList.item(itr).setTextContent(res);
+                        if (flag > 1) {
+                            res = Constants.BEGIN_CHOOSE + res + Constants.END_CHOOSE;
+                            opNodeList.item(itr).setTextContent(res);
 
-                    } else if (flag == 1) {
-                        opNodeList.item(itr).setTextContent(res);
-                    } else {
-                        res = Constants.BEGIN_NOT_FOUND + res + Constants.END_NOT_FOUND;
+                        } else if (flag == 1) {
+                            opNodeList.item(itr).setTextContent(res);
+                        }
+                        if (opNode.getParentNode().getNodeName().equals("xsl:if")) {
+                            ((Element)opNode.getParentNode()).setAttribute("test",xPath);
+                        }
                     }
-
                     flag = 0;
                 }
 
@@ -178,7 +202,6 @@ public class GetMapping {
                         }
                     }
                     System.out.println(getAbsXpath(opNode)+","+res);
-                    //System.out.println(opNode.getAttributes().item(0).getTextContent());
                 }
                 if (flag > 1) {
                     res = Constants.BEGIN_CHOOSE + res + Constants.END_CHOOSE;
