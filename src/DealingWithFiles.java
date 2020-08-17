@@ -7,36 +7,35 @@ import java.nio.file.Paths;
 
 public class DealingWithFiles {
 
-    public static void createServiceFolders(){
-        String path = Constants.serviceFilesPath+"/"+Constants.serviceName;
+    public static void createFolder(String path) {
         //Creating a File object
         File file = new File(path);
         //Creating the directory
         boolean bool = file.mkdir();
+    }
 
-        path = Constants.serviceFilesPath+"/"+Constants.serviceName+"/CONFIGURATION";
-        //Creating a File object
-        file = new File(path);
-        //Creating the directory
-        bool = file.mkdir();
+    public static void createServiceFolders() {
+        String path = Constants.TFSFilesPath+Constants.domainName;
+        createFolder(path);
 
-        path = Constants.serviceFilesPath+"/"+Constants.serviceName+"/TRANSFORMATION";
-        //Creating a File object
-        file = new File(path);
-        //Creating the directory
-        bool = file.mkdir();
+        path = Constants.serviceFilesPath+Constants.serviceName;
+        createFolder(path);
 
-        path = Constants.serviceFilesPath+"/"+Constants.serviceName+"/temp";
-        //Creating a File object
-        file = new File(path);
-        //Creating the directory
-        bool = file.mkdir();
+        path = Constants.serviceFilesPath+Constants.serviceName+"/CONFIGURATION";
+        createFolder(path);
 
-        path = Constants.stubsFilesPath+"/"+Constants.serviceName+"_Stub";
-        //Creating a File object
-        file = new File(path);
-        //Creating the directory
-        bool = file.mkdir();
+        path = Constants.serviceFilesPath+Constants.serviceName+"/TRANSFORMATION";
+        createFolder(path);
+
+        path = Constants.serviceFilesPath+Constants.serviceName+"/temp";
+        createFolder(path);
+
+        path = Constants.stubsFilesPath+Constants.serviceName+"_Stub";
+        createFolder(path);
+
+
+        path = Constants.sampleMessagesFilesPath+Constants.serviceName;
+        createFolder(path);
 
     }
 
@@ -44,20 +43,22 @@ public class DealingWithFiles {
         File file = new File(path);
         FileWriter fr = null;
         PrintWriter pr=null;
-        try {
-            fr = new FileWriter(file,true);
-            pr = new PrintWriter(file);
-            pr.flush();
-            fr.write(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally{
-            //close resources
+        if(!file.exists()){
             try {
-                fr.close();
-                pr.close();
+                fr = new FileWriter(file,true);
+                pr = new PrintWriter(file);
+                pr.flush();
+                fr.write(data);
             } catch (IOException e) {
                 e.printStackTrace();
+            }finally{
+                //close resources
+                try {
+                    fr.close();
+                    pr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

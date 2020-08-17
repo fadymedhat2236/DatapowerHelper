@@ -63,12 +63,7 @@ public class CreateServiceConfiguration {
             dump.setAttributeNode(attr);
 
             String path=Constants.serviceFilesPath+Constants.serviceName+"/CONFIGURATION/CONFIGURATION.xml";
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(path));
-            transformer.transform(domSource, streamResult);
+            WriteXMLDocumentToFile(document, path);
 
         }
         catch (ParserConfigurationException pce) {
@@ -136,11 +131,7 @@ public class CreateServiceConfiguration {
 
             String path=Constants.serviceFilesPath+Constants.serviceName+"/CONFIGURATION/"+Constants.backendName+"-ENDPOINTS.xml";
 
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(path));
-            transformer.transform(domSource, streamResult);
+            WriteXMLDocumentToFile(document, path);
 
         }
         catch (ParserConfigurationException pce) {
@@ -148,6 +139,16 @@ public class CreateServiceConfiguration {
         }
         catch (TransformerException tfe) {
             tfe.printStackTrace();
+        }
+    }
+
+    private static void WriteXMLDocumentToFile(Document document, String path) throws TransformerException {
+        if(!(new File(path).exists())) {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File(path));
+            transformer.transform(domSource, streamResult);
         }
     }
 
@@ -180,42 +181,30 @@ public class CreateServiceConfiguration {
                 userDefined.appendChild(document.createTextNode(path));
             }
 
-            Element userDefined=document.createElement("a:UsrDef11");
+            Element userDefined=document.createElement("a:BEErrorCodeXPath");
             service.appendChild(userDefined);
-            attr = document.createAttribute("target");
-            attr.setValue("RPLY");
-            userDefined.setAttributeNode(attr);
-            String path="//*[local-name()='"+Constants.errorPaths[0]+"']";
-            userDefined.appendChild(document.createTextNode(path));
-
-            userDefined=document.createElement("a:BEErrorCodeXPath");
-            service.appendChild(userDefined);
-            path=Constants.BEFixedPath+"[local-name()='"+Constants.errorPaths[1]+"']";
+            String path=Constants.BEFixedPath+"[local-name()='"+Constants.errorPaths[0]+"']";
             userDefined.appendChild(document.createTextNode(path));
 
             userDefined=document.createElement("a:BEErrorMsgXPath");
             service.appendChild(userDefined);
-            path=Constants.BEFixedPath+"[local-name()='"+Constants.errorPaths[2]+"']";
+            path=Constants.BEFixedPath+"[local-name()='"+Constants.errorPaths[1]+"']";
             userDefined.appendChild(document.createTextNode(path));
 
             userDefined=document.createElement("a:StatusCode");
             service.appendChild(userDefined);
-            path=Constants.FixedPath+"[local-name()='"+Constants.errorPaths[3]+"']";
+            path=Constants.FixedPath+"[local-name()='"+Constants.errorPaths[2]+"']";
             userDefined.appendChild(document.createTextNode(path));
 
             userDefined=document.createElement("a:StatusDesc");
             service.appendChild(userDefined);
-            path=Constants.FixedPath+"[local-name()='"+Constants.errorPaths[4]+"']";
+            path=Constants.FixedPath+"[local-name()='"+Constants.errorPaths[3]+"']";
             userDefined.appendChild(document.createTextNode(path));
 
 
             path=Constants.serviceFilesPath+Constants.serviceName+"/CONFIGURATION/AUDIT_VARS.xml";
 
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(path));
-            transformer.transform(domSource, streamResult);
+            WriteXMLDocumentToFile(document, path);
 
         }
         catch (ParserConfigurationException pce) {

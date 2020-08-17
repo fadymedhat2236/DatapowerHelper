@@ -14,6 +14,7 @@ public class DPScripts {
                 "\t\t\t\t<POST>on</POST>\n" +
                 "\t\t\t\t<GET>off</GET>\n" +
                 "\t\t\t\t<PUT>on</PUT>\n" +
+                "\t\t\t\t<PATCH>off</PATCH>\n" +
                 "\t\t\t\t<HEAD>off</HEAD>\n" +
                 "\t\t\t\t<OPTIONS>off</OPTIONS>\n" +
                 "\t\t\t\t<TRACE>off</TRACE>\n" +
@@ -40,6 +41,7 @@ public class DPScripts {
                 "\t\t\t<HTTP2MaxStreams>100</HTTP2MaxStreams>\n" +
                 "\t\t\t<HTTP2MaxFrameSize>16384</HTTP2MaxFrameSize>\n" +
                 "\t\t\t<HTTP2StreamHeader>off</HTTP2StreamHeader>\n" +
+                "\t\t\t<ChunkedEncoding>on</ChunkedEncoding>\n" +
                 "\t\t</HTTPSourceProtocolHandler>\n" +
                 "\t\t<HTTPUserAgent name=\"default\" intrinsic=\"true\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
@@ -70,6 +72,59 @@ public class DPScripts {
                 "\t\t\t<DocMaxWrites>32768</DocMaxWrites>\n" +
                 "\t\t\t<UserAgent class=\"HTTPUserAgent\">default</UserAgent>\n" +
                 "\t\t</XMLManager>\n" +
+                "\t\t<MQQM name=\"DP_QMGR_GP\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<HostName>0.0.0.1</HostName>\n" +
+                "\t\t\t<CCSID>819</CCSID>\n" +
+                "\t\t\t<ChannelName>SYSTEM.DEF.SVRCONN</ChannelName>\n" +
+                "\t\t\t<Heartbeat>300</Heartbeat>\n" +
+                "\t\t\t<MaximumMessageSize>1048576</MaximumMessageSize>\n" +
+                "\t\t\t<CacheTimeout>60</CacheTimeout>\n" +
+                "\t\t\t<UnitsOfWork/>\n" +
+                "\t\t\t<AutomaticBackout>off</AutomaticBackout>\n" +
+                "\t\t\t<TotalConnectionLimit>250</TotalConnectionLimit>\n" +
+                "\t\t\t<InitialConnections>1</InitialConnections>\n" +
+                "\t\t\t<SharingConversations>0</SharingConversations>\n" +
+                "\t\t\t<ShareSingleConversation>off</ShareSingleConversation>\n" +
+                "\t\t\t<PermitInsecureServers>off</PermitInsecureServers>\n" +
+                "\t\t\t<PermitSSLv3>off</PermitSSLv3>\n" +
+                "\t\t\t<SSLcipher>none</SSLcipher>\n" +
+                "\t\t\t<AutoRecovery>off</AutoRecovery>\n" +
+                "\t\t\t<ConvertInput>on</ConvertInput>\n" +
+                "\t\t\t<AutoRetry>on</AutoRetry>\n" +
+                "\t\t\t<RetryInterval>10</RetryInterval>\n" +
+                "\t\t\t<RetryAttempts>6</RetryAttempts>\n" +
+                "\t\t\t<LongRetryInterval>600</LongRetryInterval>\n" +
+                "\t\t\t<ReportingInterval>10</ReportingInterval>\n" +
+                "\t\t\t<AlternateUser>on</AlternateUser>\n" +
+                "\t\t\t<PollingTolerance>10</PollingTolerance>\n" +
+                "\t\t\t<XMLManager class=\"XMLManager\">default</XMLManager>\n" +
+                "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
+                "\t\t</MQQM>\n" +
+                "\t\t<MQSourceProtocolHandler name=\"ServiceName_MQ_FSH\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<QueueManager class=\"MQQM\">DP_QMGR_GP</QueueManager>\n" +
+                "\t\t\t<GetQueue>ServiceNameRq</GetQueue>\n" +
+                "\t\t\t<PutQueue>ServiceNameRs</PutQueue>\n" +
+                "\t\t\t<CodePage>0</CodePage>\n" +
+                "\t\t\t<GetMessageOptions>1</GetMessageOptions>\n" +
+                "\t\t\t<ParseProperties>off</ParseProperties>\n" +
+                "\t\t\t<AsyncPut>off</AsyncPut>\n" +
+                "\t\t\t<ExcludeHeaders>\n" +
+                "\t\t\t\t<MQCIH>off</MQCIH>\n" +
+                "\t\t\t\t<MQDLH>off</MQDLH>\n" +
+                "\t\t\t\t<MQIIH>off</MQIIH>\n" +
+                "\t\t\t\t<MQRFH>off</MQRFH>\n" +
+                "\t\t\t\t<MQRFH2>off</MQRFH2>\n" +
+                "\t\t\t\t<MQWIH>off</MQWIH>\n" +
+                "\t\t\t</ExcludeHeaders>\n" +
+                "\t\t\t<ConcurrentConnections>1</ConcurrentConnections>\n" +
+                "\t\t\t<PollingInterval>30</PollingInterval>\n" +
+                "\t\t\t<BatchSize>0</BatchSize>\n" +
+                "\t\t\t<ContentTypeHeader>None</ContentTypeHeader>\n" +
+                "\t\t\t<RetrieveBackoutSettings>off</RetrieveBackoutSettings>\n" +
+                "\t\t\t<UseQMNameInURL>off</UseQMNameInURL>\n" +
+                "\t\t</MQSourceProtocolHandler>\n" +
                 "\t\t<Matching name=\"ServiceNameRq_MR\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<MatchRules>\n" +
@@ -99,9 +154,41 @@ public class DPScripts {
                 "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<Output>NULL</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
+                "\t\t\t<Transactional>off</Transactional>\n" +
+                "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
+                "\t\t\t<SQLSourceType>static</SQLSourceType>\n" +
+                "\t\t\t<JWSVerifyStripSignature>on</JWSVerifyStripSignature>\n" +
+                "\t\t\t<Asynchronous>off</Asynchronous>\n" +
+                "\t\t\t<ResultsMode>first-available</ResultsMode>\n" +
+                "\t\t\t<RetryCount>0</RetryCount>\n" +
+                "\t\t\t<RetryInterval>1000</RetryInterval>\n" +
+                "\t\t\t<MultipleOutputs>off</MultipleOutputs>\n" +
+                "\t\t\t<IteratorType>XPATH</IteratorType>\n" +
+                "\t\t\t<Timeout>0</Timeout>\n" +
+                "\t\t\t<MethodRewriteType>GET</MethodRewriteType>\n" +
+                "\t\t\t<MethodType>POST</MethodType>\n" +
+                "\t\t\t<MethodType2>POST</MethodType2>\n" +
+                "\t\t</StylePolicyAction>\n" +
+                "\t\t<StylePolicyAction name=\"ServiceNameRq_Rule_validate_0\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
+                "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Type>validate</Type>\n" +
+                "\t\t\t<Input>INPUT</Input>\n" +
+                "\t\t\t<ParseSettingsReference>\n" +
+                "\t\t\t\t<URL/>\n" +
+                "\t\t\t\t<Literal/>\n" +
+                "\t\t\t\t<Default/>\n" +
+                "\t\t\t</ParseSettingsReference>\n" +
+                "\t\t\t<ParseMetricsResultType>none</ParseMetricsResultType>\n" +
+                "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
+                "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
+                "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
+                "\t\t\t<SchemaURL>local:///SchemaLib/Services/ServiceName.xsd</SchemaURL>\n" +
+                "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<Transactional>off</Transactional>\n" +
                 "\t\t\t<SOAPValidation>body</SOAPValidation>\n" +
                 "\t\t\t<SQLSourceType>static</SQLSourceType>\n" +
@@ -132,6 +219,7 @@ public class DPScripts {
                 "\t\t\t<OutputLanguage>default</OutputLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<TxMode>default</TxMode>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<Variable>var://context/service/endpoint-id</Variable>\n" +
                 "\t\t\t<Value>Provider-ServiceName</Value>\n" +
@@ -173,6 +261,7 @@ public class DPScripts {
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<TxMode>default</TxMode>\n" +
                 "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -209,6 +298,7 @@ public class DPScripts {
                 "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -242,6 +332,7 @@ public class DPScripts {
                 "\t\t\t<OutputLanguage>default</OutputLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<TxMode>default</TxMode>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -266,16 +357,17 @@ public class DPScripts {
                 "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyRule name=\"ServiceNameRq_Rule\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_5</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_validate_0</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_setvar_0</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_0</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_6</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_results_output_0</Actions>\n" +
                 "\t\t\t<Direction>request-rule</Direction>\n" +
                 "\t\t\t<InputFormat>none</InputFormat>\n" +
                 "\t\t\t<OutputFormat>none</OutputFormat>\n" +
                 "\t\t\t<NonXMLProcessing>off</NonXMLProcessing>\n" +
                 "\t\t\t<Unprocessed>off</Unprocessed>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_5</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_setvar_0</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_0</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_xform_6</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRq_Rule_results_output_0</Actions>\n" +
                 "\t\t</StylePolicyRule>\n" +
                 "\t\t<Matching name=\"ServiceNameRs_MR\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
@@ -306,6 +398,7 @@ public class DPScripts {
                 "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<Output>NULL</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -337,6 +430,7 @@ public class DPScripts {
                 "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<Output>NULL</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SchemaURL>local:///SchemaLib/ESB/PSRBatchManage.xsd</SchemaURL>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
@@ -372,6 +466,7 @@ public class DPScripts {
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<TxMode>default</TxMode>\n" +
                 "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -408,6 +503,7 @@ public class DPScripts {
                 "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -441,6 +537,7 @@ public class DPScripts {
                 "\t\t\t<OutputLanguage>default</OutputLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<TxMode>default</TxMode>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -465,16 +562,16 @@ public class DPScripts {
                 "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyRule name=\"ServiceNameRs_Rule\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
-                "\t\t\t<Direction>response-rule</Direction>\n" +
-                "\t\t\t<InputFormat>none</InputFormat>\n" +
-                "\t\t\t<OutputFormat>none</OutputFormat>\n" +
-                "\t\t\t<NonXMLProcessing>off</NonXMLProcessing>\n" +
-                "\t\t\t<Unprocessed>off</Unprocessed>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_xform_11</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_validate_0</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_xform_0</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_xform_12</Actions>\n" +
                 "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameRs_Rule_results_output_0</Actions>\n" +
+                "\t\t\t<Direction>response-rule</Direction>\n" +
+                "\t\t\t<InputFormat>none</InputFormat>\n" +
+                "\t\t\t<OutputFormat>none</OutputFormat>\n" +
+                "\t\t\t<NonXMLProcessing>off</NonXMLProcessing>\n" +
+                "\t\t\t<Unprocessed>off</Unprocessed>\n" +
                 "\t\t</StylePolicyRule>\n" +
                 "\t\t<Matching name=\"ServiceNameErr_MR\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
@@ -505,6 +602,7 @@ public class DPScripts {
                 "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<Output>NULL</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -540,6 +638,7 @@ public class DPScripts {
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<TxMode>default</TxMode>\n" +
                 "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -576,6 +675,7 @@ public class DPScripts {
                 "\t\t\t<TransformLanguage>none</TransformLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<Output>PIPE</Output>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -609,6 +709,7 @@ public class DPScripts {
                 "\t\t\t<OutputLanguage>default</OutputLanguage>\n" +
                 "\t\t\t<ActionDebug persisted=\"false\">off</ActionDebug>\n" +
                 "\t\t\t<TxMode>default</TxMode>\n" +
+                "\t\t\t<NoTranscodeUtf8>off</NoTranscodeUtf8>\n" +
                 "\t\t\t<NamedInOutLocationType>default</NamedInOutLocationType>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<OutputType>default</OutputType>\n" +
@@ -633,15 +734,15 @@ public class DPScripts {
                 "\t\t</StylePolicyAction>\n" +
                 "\t\t<StylePolicyRule name=\"ServiceNameErr_Rule\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_14</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_0</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_15</Actions>\n" +
+                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_results_output_0</Actions>\n" +
                 "\t\t\t<Direction>error-rule</Direction>\n" +
                 "\t\t\t<InputFormat>none</InputFormat>\n" +
                 "\t\t\t<OutputFormat>none</OutputFormat>\n" +
                 "\t\t\t<NonXMLProcessing>off</NonXMLProcessing>\n" +
                 "\t\t\t<Unprocessed>off</Unprocessed>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_14</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_0</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_xform_15</Actions>\n" +
-                "\t\t\t<Actions class=\"StylePolicyAction\">ServiceNameErr_Rule_results_output_0</Actions>\n" +
                 "\t\t</StylePolicyRule>\n" +
                 "\t\t<StylePolicy name=\"ServiceName_Policy\" xmlns:env=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dp=\"http://www.datapower.com/schemas/management\">\n" +
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
@@ -671,6 +772,7 @@ public class DPScripts {
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<Priority>normal</Priority>\n" +
                 "\t\t\t<FrontProtocol class=\"HTTPSourceProtocolHandler\">ServiceName_HTTP_FSH</FrontProtocol>\n" +
+                "\t\t\t<FrontProtocol class=\"MQSourceProtocolHandler\">ServiceName_MQ_FSH</FrontProtocol>\n" +
                 "\t\t\t<XMLManager class=\"XMLManager\">default</XMLManager>\n" +
                 "\t\t\t<SSLClientConfigType>proxy</SSLClientConfigType>\n" +
                 "\t\t\t<DefaultParamNamespace>http://www.datapower.com/param/config</DefaultParamNamespace>\n" +
@@ -756,13 +858,14 @@ public class DPScripts {
                 "\t\t\t<RewriteErrors>on</RewriteErrors>\n" +
                 "\t\t\t<DelayErrors>on</DelayErrors>\n" +
                 "\t\t\t<DelayErrorsDuration>1000</DelayErrorsDuration>\n" +
-                "\t\t\t<RequestType>soap</RequestType>\n" +
+                "\t\t\t<RequestType>xml</RequestType>\n" +
                 "\t\t\t<ResponseType>soap</ResponseType>\n" +
                 "\t\t\t<FollowRedirects>on</FollowRedirects>\n" +
                 "\t\t\t<RewriteLocationHeader>off</RewriteLocationHeader>\n" +
                 "\t\t\t<StylePolicy class=\"StylePolicy\">ServiceName_Policy</StylePolicy>\n" +
                 "\t\t\t<Type>dynamic-backend</Type>\n" +
                 "\t\t\t<AllowCompression>off</AllowCompression>\n" +
+                "\t\t\t<EnableCompressedPayloadPassthrough>off</EnableCompressedPayloadPassthrough>\n" +
                 "\t\t\t<AllowCacheControlHeader>off</AllowCacheControlHeader>\n" +
                 "\t\t\t<PolicyAttachments class=\"PolicyAttachments\">ServiceName</PolicyAttachments>\n" +
                 "\t\t\t<WSMAgentMonitor>off</WSMAgentMonitor>\n" +
@@ -771,13 +874,11 @@ public class DPScripts {
                 "\t\t\t<TransactionTimeout>0</TransactionTimeout>\n" +
                 "\t\t</MultiProtocolGateway>\n" +
                 "\t</configuration>\n" +
-                "\t<files>\n" +
-                "\t</files>\n" +
                 "</datapower-configuration>";
         temp=temp.replaceAll("ServiceName",Constants.serviceName);
-        temp=temp.replaceAll("Consumer","SABB");
+        temp=temp.replaceAll("Consumer",Constants.consumer);
         temp=temp.replaceAll("Provider",Constants.backendName);
-        temp=temp.replaceAll("14030","14");
+        temp=temp.replaceAll("14030",Constants.ServiceFSHPort);
         String path=Constants.serviceFilesPath+Constants.serviceName+"/temp/MPGWServiceconfig.xml";
         DealingWithFiles.writeToFile(temp,path);
     }
@@ -1751,7 +1852,7 @@ public class DPScripts {
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<Type>xform</Type>\n" +
                 "\t\t\t<Input>INPUT</Input>\n" +
-                "\t\t\t<Transform>local:///Stubs/serviceName_stub.xsl</Transform>\n" +
+                "\t\t\t<Transform>local:///Stubs/serviceName_Stub/serviceName_Stub.xsl</Transform>\n" +
                 "\t\t\t<ParseSettingsReference>\n" +
                 "\t\t\t\t<URL/>\n" +
                 "\t\t\t\t<Literal/>\n" +

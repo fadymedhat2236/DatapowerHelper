@@ -8,11 +8,11 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 #for the constants
 
-url="https://192.168.116.128:5550"
+url="https://localhost:5550"
 username="admin"
-password="idgadmin"
-domainName="SABB"
-path = "D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP"
+password="admin"
+domainName="Fady"
+path = "D:\\Projects\\BSF\\Middleware Services Migration\\Development\\DP\\SourceCode"
 xmlManager="default"
 
 def getFolderNames():
@@ -108,7 +108,7 @@ def addFiles(files):
     else:
         print('connectionError')
 
-def flush():
+def flush(domainName):
     xmlTemplate = '''<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
 	                    <env:Body>
 		                    <dp:request domain="'''+domainName+'''" xmlns:dp="http://www.datapower.com/schemas/management">
@@ -126,15 +126,17 @@ def flush():
     r = requests.post(url, auth=(username, password), data=xmlTemplate, verify=False)
     if r.status_code == 200:
         if 'OK' in r.text:
-            print('flushed successfully')
+            print(domainName+' flushed successfully')
         else:
-            print('flushing failed')
+            print(domainName+' flushing failed')
     else:
         print('connectionError')
 
 
-folders, files = getAll(url, username, password, domainName, path)
-deleteFolders()
-addFolders(folders)
-addFiles(files)
-flush()
+#folders, files = getAll(url, username, password, domainName, path)
+#deleteFolders()
+#addFolders(folders)
+#addFiles(files)
+domains = ["Fady", "test"]
+for domainName in domains:
+    flush(domainName)

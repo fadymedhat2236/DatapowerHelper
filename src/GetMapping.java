@@ -21,11 +21,12 @@ public class GetMapping {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node opNode = nodeList.item(i);
             if ((conditionTags.containsKey(opNode.getNodeName()+counter) && conditionTags.get(opNode.getNodeName())!=" ") ||
-                    (conditionTags.containsKey(opNode.getNodeName()) && conditionTags.get(opNode.getNodeName())==" ")) {
+                    (conditionTags.containsKey(opNode.getLocalName()) && conditionTags.get(opNode.getLocalName())==" ")) {
                 conditionTags.remove(opNode.getNodeName());
                 Document doc=opNode.getOwnerDocument();
                 Node parent=opNode.getParentNode();
                 Element test=doc.createElement("xsl:if");
+                test.setAttribute("test","");
                 Node temp=opNode.cloneNode(true);
                 test.appendChild(temp);
                 parent.replaceChild(test,opNode);

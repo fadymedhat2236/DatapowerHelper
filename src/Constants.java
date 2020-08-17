@@ -1,16 +1,21 @@
 import java.util.HashMap;
 
 public class Constants {
-    public static final String serviceName="B2BEKAccrualNotification";
-    public static final String backendName="EK";
-    public static final String domainURL="https://192.168.116.128:9090";
+    public static final String serviceName="BillQuerySGW";
+    public static final String consumer="ESB";
+    public static final String backendName="SADAD";
+    public static final String domainURL="https://192.168.126.128:9090";
     public static final String WSDLFragmentID="http://www.SABB.com/iWallet/";
-    public static final String partner="EK";
+    public static final String partner="SADAD";
+    public static final String domainName="SGW";
     //for the files
-    public static final String serviceFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Services\\";
-    public static final String stubsFilesPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\SourceCode\\Gateway_DP\\Stubs\\";
-    public static final String StubMatchXpath="getCalculaterV2";
-    public static final String StubFSHPort="3242";
+    public static final String TFSFilesPath="D:\\Projects\\BSF\\Middleware Services Migration\\Development\\DP\\SourceCode\\";
+    public static final String serviceFilesPath=TFSFilesPath+domainName+"\\";
+    public static final String stubsFilesPath=TFSFilesPath+"Stubs\\";
+    public static final String sampleMessagesFilesPath="D:\\Projects\\BSF\\Middleware Services Migration\\Development\\DP\\Testing Evidence\\Sample Messages\\";
+    public static final String StubMatchXpath="REQUEST";
+    public static final String ServiceFSHPort="8011";
+    public static final String StubFSHPort="9200";
 
     //Configuration file
     public static final String AUDIT_FLG="true";
@@ -20,7 +25,7 @@ public class Constants {
     public static final String DUMP_RESPONSE_FLG="true";
 
     //endpoints file
-    public static final String EP_ID[]={"EK-B2BEKAccrualNotification"};
+    public static final String EP_ID[]={"SADAD-BillQuerySGW"};
     public static final String EP_PROTOCOL[]={"HTTP"};
     public static final String EP_REQUEST[]={"http://127.0.0.1:"+Constants.StubFSHPort};
     public static final String EP_RESPONSE[]={null,"B2BiWalletComplaintMng"};
@@ -30,15 +35,16 @@ public class Constants {
 
     //auditVARS file
     //,{"UsrDef4","IRPLY","ReceiptDt"}
-    public static final String auditVars[][] ={{"UsrDef1","RPLY","ExternalBatchID"}};
-    //for the error mapping
-    public static final String BEFixedPath="//*[local-name()='MsgRsHdr']/*[local-name()='ResponseStatus']/*";
-    public static final String FixedPath="//*[local-name()='Header']/*[local-name()='ISMHdr']/*[local-name()='RespeCde']/*";
-    public static final String errorPaths[]={"RtrnCde","StatusCode","StatusDetail","ReasCde","DiagText"};
+    public static final String auditVars[][] ={{"UsrDef1","REQ","BillKey"},{"UsrDef2","REQ","AccountKey"},{"UsrDef3","REQ","POINum"},
+            {"UsrDef4","REQ","POIType"},{"UsrDef5","REQ","BillerId"}};
+    //for the error mapping/DDCAPGWRs/MsgRsHdr/Status/StatusCode
+    public static final String BEFixedPath="//*[local-name()='Fault']/*[local-name()='detail']/*[local-name()='PresentmentFault']/*";
+    public static final String FixedPath="//*[local-name()='MsgRsHdr']/*[local-name()='Status']/*";
+    public static final String errorPaths[]={"Code","Description","StatusCode","StatusDesc"};
 
 
     //transformation files
-    public static final String XMLFilesfixedPath="D:\\Projects\\SABB_TFS\\(Common)\\Development\\_DataPower\\Testing\\Sample Messages\\";
+    public static final String XMLFilesfixedPath="D:\\Projects\\BSF\\Middleware Services Migration\\Development\\DP\\Testing Evidence\\Sample Messages\\";
     public static final String inputRequest="inputRequest.xml";
     public static final String outputRequest="outputRequest.xml";
     public static final String inputResponse="inputResponse.xml";
@@ -51,36 +57,12 @@ public class Constants {
             "    xmlns:dpconfig=\"http://www.datapower.com/param/config\"\n" +
             "    extension-element-prefixes=\"dp\" \n" +
             "\texclude-result-prefixes=\"xs dp dpconfig\" version=\"2.0\">\n" +
-            "    <xsl:import href=\"local:/Framework/LIBS/ERROR_MAPPING.xsl\" dp:ignore-multiple=\"yes\"/>\n" +
-            "    <xsl:import href=\"local:/Framework/LIBS/UTIL.xsl\" dp:ignore-multiple=\"yes\"/>\n" +
-            "    <xsl:variable name=\"errorMapped\">\n" +
-            "        <xsl:choose>\n" +
-            "\t\t\n" +
-            "            <xsl:when test=\"dp:variable('var://service/error-subcode') != '0x00000000'\">\n" +
-            "                <xsl:call-template name=\"ejd:find-error-mapping\">\n" +
-            "                    <xsl:with-param name=\"code\" select=\"dp:variable('var://service/error-subcode')\"/>\n" +
-            "                    <xsl:with-param name=\"backend-name\" select=\"'SABBGW'\"/>\n" +
-            "                </xsl:call-template>\n" +
-            "            </xsl:when>\n" +
-            "            <xsl:otherwise>\n" +
-            "                <xsl:call-template name=\"ejd:find-error-mapping\">\n" +
-            "                    <xsl:with-param name=\"code\" select=\"dp:variable('var://service/error-code')\"/>\n" +
-            "                    <xsl:with-param name=\"backend-name\" select=\"'SABBGW'\"/>\n" +
-            "                </xsl:call-template>\n" +
-            "            </xsl:otherwise>\n" +
-            "        </xsl:choose>\n" +
-            "    </xsl:variable>\n" +
-            "\n" +
-            "\n" +
+            "    <xsl:import href=\"local:/Services/LIBS/UTIL.xsl\" dp:ignore-multiple=\"yes\"/>\n" +
+            "    \n" +
             "    <xsl:template match=\"/\">\n" +
-            "        <B2BCRDtlsInqRs>\n" +
-            "            <xsl:call-template name=\"retrieve-SABB-header\">\n" +
-            "                <xsl:with-param name=\"RtrnCde\" select=\"$errorMapped/em:MAPPING/em:RETURNCODE\"/>\n" +
-            "                <xsl:with-param name=\"ReasCde\" select=\"$errorMapped/em:MAPPING/em:REASONCODE\"/>\n" +
-            "                <xsl:with-param name=\"DiagText\" select=\"$errorMapped/em:MAPPING/em:DIAGTEXT\"/>\n" +
-            "            </xsl:call-template>\n" +
-            "            <Body/>\n" +
-            "        </B2BCRDtlsInqRs>\n" +
+            "        <xsl:call-template name=\"generate-ESB-general-error\">\n" +
+            "            <xsl:with-param name=\"msgRoot\" select=\"''\"></xsl:with-param>\n" +
+            "        </xsl:call-template>\n" +
             "    </xsl:template>\n" +
             "</xsl:stylesheet>\n";
 
@@ -171,34 +153,12 @@ public class Constants {
 
         //0 for request 1 for response
         if(direction==false){
-            conditionTags.put("json:string1","channelCode");
-            conditionTags.put("json:string2","enrolmentMethod");
-            conditionTags.put("json:string3","membershipType");
-            conditionTags.put("json:string4","title");
-            conditionTags.put("json:string5","firstName");
-            conditionTags.put("json:string6","lastName");
-            conditionTags.put("json:string7","dateOfBirth");
-            conditionTags.put("json:string8","gender");
-            conditionTags.put("json:string9","nationality");
-            conditionTags.put("json:string10","emailAddress");
-            conditionTags.put("json:string11","language");
-            conditionTags.put("json:string12","addressType");
-            conditionTags.put("json:string13","town");
-            conditionTags.put("json:string14","postalCode");
-            conditionTags.put("json:string15","country");
-            conditionTags.put("json:string16","preferredContactMethod");
-            conditionTags.put("json:string17","contactType");
-            conditionTags.put("json:string18","isdCode");
-            conditionTags.put("json:string19","contactNumber");
-            conditionTags.put("json:string20","partnerCode");
-            conditionTags.put("json:string21","partnerMembershipNumber");
-            conditionTags.put("json:string22","partnerProductCode");
-            conditionTags.put("json:string23","deDupe");
+            conditionTags.put("AccessChannel"," ");
+            conditionTags.put("ProxyCustId"," ");
         }
         else{
 
         }
-        conditionTags.put("DepositDate","");
         return conditionTags;
     }
 
