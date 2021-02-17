@@ -37,6 +37,11 @@ public class DealingWithFiles {
         path = Constants.sampleMessagesFilesPath+Constants.serviceName;
         createFolder(path);
 
+        DealingWithFiles.writeToFile("",path+"/"+Constants.inputRequest);
+        DealingWithFiles.writeToFile("",path+"/"+Constants.outputRequest);
+        DealingWithFiles.writeToFile("",path+"/"+Constants.inputResponse);
+        DealingWithFiles.writeToFile("",path+"/"+Constants.outputResponse);
+
     }
 
     public static void writeToFile(String data,String path) {

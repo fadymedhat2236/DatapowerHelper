@@ -22,7 +22,7 @@ public class GetMapping {
             Node opNode = nodeList.item(i);
             if ((conditionTags.containsKey(opNode.getNodeName()+counter) && conditionTags.get(opNode.getNodeName())!=" ") ||
                     (conditionTags.containsKey(opNode.getLocalName()) && conditionTags.get(opNode.getLocalName())==" ")) {
-                conditionTags.remove(opNode.getNodeName());
+                //conditionTags.remove(opNode.getNodeName());
                 Document doc=opNode.getOwnerDocument();
                 Node parent=opNode.getParentNode();
                 Element test=doc.createElement("xsl:if");
@@ -157,6 +157,19 @@ public class GetMapping {
                         } else if (flag == 1) {
                             opNodeList.item(itr).setTextContent(res);
                         }
+                        /*//add test condition for all nodes
+                        if(!xPath.equals("")){
+                            Document doc=opNode.getOwnerDocument();
+                            Node parent=opNode.getParentNode();
+                            Element test=doc.createElement("xsl:if");
+                            test.setAttribute("test",xPath);
+                            Node temp=opNode.cloneNode(true);
+                            test.appendChild(temp);
+                            parent.replaceChild(test,opNode);
+                            opNodeList=doc.getElementsByTagName("*");
+                            itr++;
+                        }*/
+
                         if (opNode.getParentNode().getNodeName().equals("xsl:if")) {
                             ((Element)opNode.getParentNode()).setAttribute("test",xPath);
                         }

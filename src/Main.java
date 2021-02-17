@@ -6,28 +6,26 @@ import java.io.IOException;
 
 public class Main {
 
-
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, TransformerException {
-
         try {
             /*******************first create service folders*******************/
-            DealingWithFiles.createServiceFolders();
+            //DealingWithFiles.createServiceFolders();
 
             /*******************for the configuration files*******************/
-            CreateServiceConfiguration.createConfigurationFile();
-            CreateServiceConfiguration.createEndPointsFile();
-            CreateServiceConfiguration.createauditVarsFile();
+            //CreateServiceConfiguration.createConfigurationFile();
+            //CreateServiceConfiguration.createEndPointsFile();
+            //CreateServiceConfiguration.createauditVarsFile();
 
             /*******************for the transformtion templates*******************/
             //CreateServiceTransformation.createTransformationTemplates();
 
-            DPScripts.generateStubConfiguration();
-            DPScripts.generateMPGWConfiguration();
+            //DPScripts.generateStubConfiguration();
+            //DPScripts.generateMPGWConfiguration();
             //DPScripts.generateWSPConfiguration();
 
             //GetMapping.returnTablesMapping("D:\\Test\\RequestInput.xml","D:\\Test\\RequestOutput.xml");
-            //System.out.println(GetMapping.Execute("D:\\Test\\RequestInput.xml","D:\\Test\\RequestOutput.xml",false));
-
+            System.out.println(GetMapping.Execute("D:\\Test\\RequestInput.xml","D:\\Test\\RequestOutput.xml",false));
+            System.out.println(GetMapping.Execute("D:\\Test\\ResponseInput.xml","D:\\Test\\ResponseOutput.xml",true));
         }
         catch (Exception e){
             e.printStackTrace();

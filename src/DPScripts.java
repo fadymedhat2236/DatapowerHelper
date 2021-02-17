@@ -1852,7 +1852,7 @@ public class DPScripts {
                 "\t\t\t<mAdminState>enabled</mAdminState>\n" +
                 "\t\t\t<Type>xform</Type>\n" +
                 "\t\t\t<Input>INPUT</Input>\n" +
-                "\t\t\t<Transform>local:///Stubs/serviceName_Stub/serviceName_Stub.xsl</Transform>\n" +
+                "\t\t\t<Transform>local:///Stubs/Services/serviceName_Stub/serviceName_Stub.xsl</Transform>\n" +
                 "\t\t\t<ParseSettingsReference>\n" +
                 "\t\t\t\t<URL/>\n" +
                 "\t\t\t\t<Literal/>\n" +

@@ -11,7 +11,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 url="https://localhost:5550"
 username="admin"
 password="admin"
-domainName="Fady"
+domainName="BSF"
 path = "D:\\Projects\\BSF\\Middleware Services Migration\\Development\\DP\\SourceCode"
 xmlManager="default"
 
@@ -137,6 +137,8 @@ def flush(domainName):
 #deleteFolders()
 #addFolders(folders)
 #addFiles(files)
-domains = ["Fady", "test"]
+
+domains = ["SaudiPost_GW","SADADEsal_GW","MCI_GW","MasterCard_GW","DDCAP_GW","SADADBank_GW","SADADBiller_GW","REDF_GW","MOI_GW","SIMAH_GW","Stubs"]
 for domainName in domains:
     flush(domainName)
+
